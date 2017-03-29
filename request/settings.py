@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 'retest',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,3 +122,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 DATE_INPUT_FORMATS = ('%d-%m-%Y')
+AUTH_PROFILE_MODULE = 'retest.UserProfile'

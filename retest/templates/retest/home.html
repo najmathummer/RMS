@@ -94,10 +94,10 @@ body {
       <div class="col-sm-2 sidenav">
         <p>My Profile</p>
         <img src="#" alt="" class="img-circle" height="65" width="65" alt="" />
-        <h4>#name</h4>
-        <p>#class</p>
-        <p>#branch</p>
-        <p>#designation</p>
+        <h4><b>{{user.username}}</b></h4>
+        <p>{{users.batch}}</p>
+        <p>Class Representitive</p>
+        <p>{{users.dept}}</p>
       </div>
 
       <div class="col-sm-9">
@@ -116,19 +116,73 @@ body {
                 </h4>
               </div>
               <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body"></div>
-                <div class="panel-footer"></div>
+                <div class="panel-body">
+                  <table class="table" style="text-align: left;">
+              <thead>
+              
+              <tr>
+                    <th>Requested by</th>
+                    <th>Requested on</th>
+                  </tr>
+              </thead>
+              {% for request in all_requests %}
+              <tbody>
+                
+                
+                  
+                       
+                  <tr>
+                   <td>{{ request.name }}</td>
+                   <td>{{ request.date }}</td>
+                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';">View details</button></td>
+                   <tr>
+                  
+                          
+                   
+                  
+              </tbody>
+              {% endfor %}
+            </table>
+                </div>
+                
               </div>
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" data-toggle="tooltip" title="Click to open and close it">Pending Request</a>
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" data-toggle="tooltip" title="Click to open and close it">Accepted Request</a>
                 </h4>
               </div>
               <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body"><a href="#"></a> </div>
-                <div class="panel-footer"><a href="#"></a></div>
+                <div class="panel-body">
+                  <table class="table" style="text-align: left;">
+              <thead>
+              
+              <tr>
+                    <th>Requested by</th>
+                    <th>Requested on</th>
+                  </tr>
+              </thead>
+              {% for request in all_requests %}
+              <tbody>
+                
+                
+                  
+                  {% if request.is_principal %}       
+                  <tr>
+                   <td>{{ request.name }}</td>
+                   <td>{{ request.date }}</td>
+                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';">View details</button></td>
+                   <tr>
+                  {% endif %}
+                          
+                   
+                  
+              </tbody>
+              {% endfor %}
+            </table>
+                </div>
+                
               </div>
             </div>
           </div>

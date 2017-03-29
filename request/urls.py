@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.conf import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    
     url(r'^retest/', include('retest.urls')),
     url(r'^', include('retest.urls', namespace="retest")),
+
+
 ]

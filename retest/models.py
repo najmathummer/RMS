@@ -1,5 +1,12 @@
 #!/usr/bin/python -tt
 from django.db import models
+from django.core.urlresolvers import reverse
+
+
+from django.contrib.auth.models import User, UserManager
+from django.db.models.signals import post_save
+
+
 
 
 
@@ -8,6 +15,16 @@ class Departement(models.Model):
 	hod = models.ForeignKey('auth.User')
 	def __str__(self):
 				 return self.dept
+
+class CustomUser(User):
+    
+    dept = models.ForeignKey(Departement)
+    avatar = models.ImageField(upload_to='/', null=True, blank=True)
+    batch = models.CharField(max_length=5, blank=True)
+    objects = UserManager()
+
+    
+
 class Semester(models.Model):
 	sem = models.CharField(max_length=50)
 	#year = models.CharField(max_length=50)
@@ -34,7 +51,7 @@ class Subject(models.Model):
 	
 class Student(models.Model):
 	name = models.CharField(max_length=50)
-	admnno = models.CharField(max_length=50, primary_key=True)
+	admnno = models.CharField(max_length=50)
 	dept = models.ForeignKey(Departement)
 	sem = models.ForeignKey(Semester)
 	batch = models.ForeignKey(Batch)
@@ -48,10 +65,14 @@ class Retest(models.Model):
 	date = models.DateField(blank=True, null=True)
 	subject = models.ForeignKey(Subject)
 	name = models.CharField(max_length=50)
-	admnno = models.ForeignKey(Student)
+	admnno = models.CharField(max_length=50)
 	reason = models.CharField(max_length=50)
 	proof = models.CharField(max_length=200)
+	is_hod = models.BooleanField(default=False)
+	is_principal = models.BooleanField(default=False)
+
+	def get_absolute_url(self):
+		return reverse( 'retest:retestform')
 	def __str__(self):
 				 return self.name
-	
-	
+
