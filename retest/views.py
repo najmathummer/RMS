@@ -8,6 +8,18 @@ from .models import Departement, Semester, Subject, Batch, Retest, CustomUser
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView 
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
+
+def logout_user(request):
+    logout(request)
+    form = UserForm(request.POST or None)
+    context = {
+        "form": form,
+    }
+    return render(request, 'retest/login.html', context)
+
+
 
 
     
@@ -16,7 +28,7 @@ def login_user(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        all_requests= Retest.objects.all()
+        all_requests= Retest.objects.all() 
         
         
         
@@ -40,7 +52,7 @@ def login_user(request):
         else:
             return render(request, 'retest/login.html', {'error_message': 'Invalid login'})
     return render(request, 'retest/login.html')
-
+@login_required
 def details(request, retest_id):
     a = User.objects.get(username='Varghese')
     try:
@@ -52,6 +64,7 @@ def details(request, retest_id):
 class RetestCreate(CreateView):
     model = Retest
     fields = ['semester', 'dept', 'batch', 'date', 'subject', 'name', 'admnno', 'reason', 'proof']
+@login_required
 def accept(request, retest_id):
     retest = get_object_or_404(Retest, pk=retest_id)
     # update is_hod attribute only if the request is a POST.
@@ -59,6 +72,7 @@ def accept(request, retest_id):
         retest.is_hod = True
         retest.save(update_fields=['is_hod'])
     return render(request, 'retest/details.html' , {'retest': retest})
+@login_required
 def request(request, retest_id):
     a = User.objects.get(username='Varghese')
     try:
@@ -67,14 +81,17 @@ def request(request, retest_id):
         raise Http404("Request does not exit")
     return render(request, 'retest/request.html' , { 'retest': retest , 'a' : a })
 
+@login_required
 def accepted(request, retest_id):
     retest = get_object_or_404(Retest, pk=retest_id)
     # update is_hod attribute only if the request is a POST.
     if request.method == 'POST':
         retest.is_principal = True
         retest.save(update_fields=['is_principal'])
+        email = EmailMessage('Hello', 'World', to=['najmathu8@gmail.com'])
+        email.send()
     return render(request, 'retest/request.html' , {'retest': retest})
-
+@login_required
 def retreq(request, retest_id):
     a = User.objects.get(username='Varghese')
     try:
@@ -82,3 +99,7 @@ def retreq(request, retest_id):
     except Retest.DoesNotExist:
         raise Http404("Request does not exit")
     return render(request, 'retest/retreq.html' , { 'retest': retest , 'a' : a })
+
+def homepage(request):
+    return render(request, 'retest/rms.html', {})
+

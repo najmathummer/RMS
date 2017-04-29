@@ -32,17 +32,17 @@
     </div>
   </nav>
   <div class="container">
-  <p>Varghese<br>{{retest.semester }}{{ retest.batch }}<br>College of engineering, Chengannur</p>
+  <p>retest.name<br>{{retest.semester }}{{ retest.batch }}<br>College of engineering, Chengannur</p>
   </div>
   <div class="container">
-  <p>Computer Science HOD<br>College of engineering, Chengannur</p>
+  <p>Head of the Dept<br>retest.dept<br>College of engineering, Chengannur</p>
   <!--<p>College of engineering, Chengannur</p>-->
   </div>
   <div class="container">
   <p>Subject: Request for retest.</p>
   </div>
   <div class="container">
-  <p> I {{retest.name}} of semester {{retest.semester}}, batch {{ retest.batch }}, admission number {{retest.admnno }} request the permission to conduct the retest for {{ retest.subject }} conducted on {{ retest.date }}. Kindly permit the request.</p>
+  <p> I {{retest.name}} of semester {{retest.semester}}, batch {{ retest.batch }},admission number {{retest.admnno }}, could'nt attend the {{retest.subject}} examination which held on {{request.date}}.So I request you to grant the permission for the retest.</p>
   </div>
   <div class="container">
   <p>Yours faithfully<br>{{ retest.name}}</p>
@@ -55,6 +55,5 @@
     
     <input type="submit" value="Submit" />
 </form>
-<!--<button class="btn btn-primary" onclick="location.href= '/retest/';">Accept</button>
-<button class="btn btn-primary" onclick="location.href= '/retest/';">Decline</button>-->
+
 </div>

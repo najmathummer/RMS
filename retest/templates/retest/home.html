@@ -82,7 +82,9 @@ body {
           <li class="active"><a href="#"><i class="fa fa-home"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="retest/login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          <li><a href="{% url 'retest:logout_user' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a></li>
         </ul>
       </div>
     </div>
