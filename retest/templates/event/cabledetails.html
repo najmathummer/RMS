@@ -12,46 +12,47 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
+    
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span> 
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">logo</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#"><i class="fa fa-home"></i></a></li>
+          <li class="active"><a href="#">Request Management System</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-
-          <li><a href="{% url 'retest:logout_user' %}">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
-                    </a></li>
-
+          <li><a href="retest/login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </div>
   </nav>
+  <div class="container">
+  <p>Gokul G<br>IEEE Chairman<br>S6 C<br>College of engineering, Chengannur</p>
+  </div>
+  <div class="container">
+   <p>{{ user.username }}<br><br>College of engineering, Chengannur</p>
+  </div>
+  <div class="container">
+  <p>Subject: Permission for accessing extension cable.</p>
+  </div>
+  <div class="container">
+  <p> I Gokul G (S6 C) IEEE Chairman request the permission to access the {{ Eventextensioncable.extension_cable }} on {{ Eventextensioncale.date }} from {{ Eventextensioncable.fromt }} to {{ Eventextensioncable.to }}. Kindly permit the request.</p>
+  </div>
+  <div class="container">
+  <p>Yours faithfully<br>Gokul G</p>
+  </div>
 
- 
-  <div class="container">
-  <p>Varghese<br>{{retest.semester }}{{ retest.batch }}<br>College of engineering, Chengannur</p>
-  </div>
-  <div class="container">
-  <p>Computer Science HOD<br>College of engineering, Chengannur</p>
-  <!--<p>College of engineering, Chengannur</p>-->
-  </div>
-  <div class="container">
-  <p>Subject: Request for retest.</p>
-  </div>
-  <div class="container">
-  <p> I {{retest.name}} of semester {{retest.semester}}, batch {{ retest.batch }}, admission number {{retest.admnno }} request the permission to conduct the retest for {{ retest.subject }} conducted on {{ retest.date }}. Kindly permit the request.</p>
-  </div>
-  <div class="container">
-  <p>Yours faithfully<br>{{ retest.name}}</p>
-  </div>
+</div>
+<div class="container">
+<form action="{% url 'retest:cableaccept' eventextensioncable.id %} " method="post">
+    {% csrf_token %}
+    
+    <input type="submit" value="Accept" />
+</form>
 
 </div>

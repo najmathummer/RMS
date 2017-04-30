@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>name</title>
+  <title>{{ user.username }}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,9 +14,6 @@
 
 <style>
 
- 
-    
-
   body {
      
     height: 100%;
@@ -25,7 +22,6 @@
    background-repeat: no-repeat;
     
     }
-
 
   .navbar navbar-inverse {
      height: 20px;
@@ -60,8 +56,6 @@
   </style>
 
 <body>
-   
-  <!--<div class="page header"><h4>System Management System</h4></div>--> 
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -77,16 +71,12 @@
           <li class="active" style="height: 28px;"><a href="#"><i class="fa fa-home"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-
-          <li><a href="{% url 'retest:logout_user' %}">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
-                    </a></li>
-
+          <li><a href="retest/login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         </ul>
       </div>
     </div>
   </nav>
-<!--profile section-->
+
 
 <div class="container">
   <div class="container text-center">    
@@ -94,15 +84,12 @@
       <div class="col-sm-2 sidenav">
         <p>My Profile</p>
         <img src="/images/{{ users.avatar}}"  alt="" class="img-circle" height="65" width="65" alt="" />
-        <h4><b>{{user.username}}</b></h4>
-        <p>HOD</p>
-        <p>{{users.dept}}</p>
+        <h4><b>Dr.{{user.username}}</b></h4>
+        <p>IHRD NSS Co-ordinator</p>
         <p>College of Engineering Chengannur</p>
       </div>
 
         <div class="col-sm-9">
-
-          
           <div class="panel-group" id="accordion">
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -112,7 +99,7 @@
               </div>
               <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
-              <table class="table" style="text-align: left;">
+                  <table class="table" style="text-align: left;">
               <thead>
               <tr>
                     <th>Requested by</th>
@@ -120,53 +107,40 @@
                     <th>Requested item</th>
                   </tr>
               </thead>
-              {% for request in all_requests %}
+              <!--{% for request in mikesystem_requests %}
               <tbody>
-                {% if request.dept == users.dept %}   
-                   <td>{{ request.name }}</td>
-                   <td>{{ request.date }}</td>
-                   <td>Retest</td>
+              {% if request.is_accept is 1 %}
 
-                   <td><button onclick="location.href= '/retest/{{ request.id }}/';">View details</button></td>
-                   <tr>
-                   {% endif %}
-              </tbody>
-              {% endfor %}
-              {% for request in projector_requests %}
-              <tbody>
-                {% if request.is_accept is 1 %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
-                   <td>{{ request.projector }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projecterdetails';">View details</button></td>
-                   </tr>
-                {% endif %}   
-                </tbody>
-                {% endfor %}
-
-              {% for request in lab_requests %}
-              <tbody>
-                {% if request.is_accept is 1 %}
-                   <td>Gokul G</td>
-                   <td>{{ request.date }}</td>
-                   <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
-                   </tr>
-                {% endif %} 
+                   <td>{{ request.mike_system }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   <tr> 
+              {% endif %}
               </tbody>
               {% endfor %}
-
               {% for request in extensioncable_requests %}
-              <tbody> 
-                {% if request.is_accept is 1 %}
-                   <td>Gokul G</td>
-                   <td>{{ request.date }}</td>
+              <tbody>
+              {% if requests.is_accept is 1 %}
+                   <td>{{ user.username }}</td>
+                   <td>{{ requests.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}cabledetails';">View details</button></td>
-                   </tr>
-                {% endif %}  
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   <tr> 
+              {% endif %}
               </tbody>
-              {% endfor %}
+              {% endfor %}-->
+              {% for request in event_request %}
+              <tbody>
+                {% if request.sec_name == section.sec_name %}
+                    <tr>
+                      <td>Gokul G</td>
+                      <td>{{ request.date }}</td>
+                      <td>{{ request.mike_system }}</td>
+                      <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                    </tr>
+                  {% endif %}
+              </tbody>
             </table>
                 </div>
               </div>
@@ -178,71 +152,42 @@
                 </h4>
               </div>
               <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body"><a href="#"></a> </div>
-                </div>
-              <div id="collapse2" class="panel-collapse collapse">
                 <div class="panel-body">
-                  <table class="table" style="text-align: left;">
+                    <table class="table" style="text-align: left;">
               <thead>
+              
               <tr>
                     <th>Requested by</th>
                     <th>Requested on</th>
                     <th>Requested item</th>
                   </tr>
               </thead>
-              {% for request in all_requests %}
+              {% for request in mikesystem_requests %}
               <tbody>
-                
-                
-                  
-                  {% if request.is_principal %}       
-                  <tr>
-                   <td>{{ request.name }}</td>
-                   <td>{{ request.date }}</td>
-                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';">View details</button></td>
-                   <tr>
-                  {% endif %}
-                          
-                   
-                  
-              </tbody>
-              {% endfor %}
-              {% for request in projector_requests %}
-              <tbody>
-                {% if request.is_accept is 2 %}
+              {% if request.is_accept is 2 %}
+
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
-                   <td>{{ request.projector }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projecterdetails';">View details</button></td>
-                   </tr>
-                {% endif %}   
-                </tbody>
-                {% endfor %}
-
-              {% for request in lab_requests %}
-              <tbody>
-                {% if request.is_accept is 2 %}
-                   <td>Gokul G</td>
-                   <td>{{ request.date }}</td>
-                   <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
-                   </tr>
-                {% endif %} 
+                   <td>{{ request.mike_system }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   <tr> 
+              {% endif %}
               </tbody>
               {% endfor %}
-
               {% for request in extensioncable_requests %}
-              <tbody> 
-                {% if request.is_accept is 2 %}
+              <tbody>
+              {% if requests.is_accept is 2 %}
                    <td>Gokul G</td>
-                   <td>{{ request.date }}</td>
+                   <td>{{ requests.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}cabledetails';">View details</button></td>
-                   </tr>
-                {% endif %}  
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   <tr> 
+              {% endif %}
               </tbody>
               {% endfor %}
             </table>
+                </div>
+              </div>
             </div>
           </div>
           </div>
@@ -252,4 +197,3 @@
 </div>
 </body>
 </html>
-

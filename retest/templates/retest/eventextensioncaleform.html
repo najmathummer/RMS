@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+  </head>
+  <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span> 
+        </button>
+        <a class="navbar-brand" href="#">logo</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#"><i class="fa fa-home"></i></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+          <li><a href="{% url 'retest:logout_user' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a></li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ 
+    
+  <div class="container" style="padding: 100px 25px;font-family: sans-serif">
+  <h1 class="heading" style=" text-align: center;padding-bottom: 50px"><b>Request</b></h1>
+  
+  <form>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <label for="sel1">Extension cable</label>
+          <select class="form-control" id="sel1">
+            {% for extension_cables in cable %}
+              <option>{{ extension_cables.cable }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="text" class="form-control" placeholder="DD/MM/YYYY" >
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>From</label>
+            <input type="text" class="form-control" placeholder="time" >
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>To</label>
+            <input type="text" class="form-control" placeholder="time" >
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <input type="submit" class="btn btn-primary" value="Submit Request" style="margin-left: 520px">
+
+
+  </form>
+    
+  </div>  
+  </body>
+  </html>

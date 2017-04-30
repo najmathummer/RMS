@@ -19,7 +19,6 @@ class Departement(models.Model):
 class CustomUser(User):
     
     dept = models.ForeignKey(Departement)
-    avatar = models.ImageField(upload_to='/', null=True, blank=True)
     batch = models.CharField(max_length=5, blank=True)
     objects = UserManager()
 
@@ -32,14 +31,9 @@ class Semester(models.Model):
 				 return self.sem
 class Batch(models.Model):
 	div = models.CharField(max_length=1)
-	#year = models.CharField(max_length=50)
 	def __str__(self):
 				 return self.div
 
-
-	
-	
-	
 
 class Subject(models.Model):
 	dept = models.ForeignKey(Departement)
@@ -75,4 +69,151 @@ class Retest(models.Model):
 		return reverse( 'retest:retestform')
 	def __str__(self):
 				 return self.name
+
+
+#events tables
+
+class Section(models.Model):
+	sec_name = models.CharField(max_length=50)
+	head = models.ForeignKey('auth.User')
+	def __str__(self):
+				 return self.sec_name
+class Classroom(models.Model):
+	roomno = models.CharField(max_length=50)
+	head = models.ForeignKey('auth.User')
+
+	def __str__(self):
+				 return str(self.roomno)			 
+
+class Auditoriums(models.Model):
+	audi = models.CharField(max_length=50)
+	head = models.ForeignKey('auth.User')
+
+	def __str__(self):
+				 return self.audi
+
+class Labs(models.Model):
+	name = models.CharField(max_length=50) 
+	sec = models.ForeignKey(Section)
+	
+	def __str__(self):
+				 return self.name 
+
+class Graphicshalls(models.Model):
+	graph = models.CharField(max_length=50)
+	head = models.ForeignKey('auth.User')
+	def __str__(self):
+				 return self.graph
+
+class Mikesystems(models.Model):
+	mike = models.CharField(max_length=50)
+	head = models.ForeignKey('auth.User')
+	def __str__(self):
+				 return self.mike
+
+class Projectors(models.Model):
+	pro = models.CharField(max_length=50)
+	sec = models.ForeignKey(Section)
+	
+	
+	def __str__(self):
+				 return self.pro 
+
+	
+class Extension_cables(models.Model):
+	cable = models.CharField(max_length=50)
+	sec = models.ForeignKey(Section)
+	def __str__(self):
+				 return self.cable
+		       
+
+class Eventprojector(models.Model):
+	projector = models.ForeignKey(Projectors)
+	date = models.DateField(blank=True, null=True)
+	start = models.CharField(max_length=50, null=True)
+	end = models.CharField(max_length=50, null=True)
+	is_accept = models.IntegerField(default=0)
+
+	def get_absolute_url(self):
+		return reverse( 'retest:eventprojectorform')
+	def __str__(self):
+				 return str(self.id)
+
+
+class Eventlab(models.Model):
+	lab = models.ForeignKey(Labs)
+	date = models.DateField(blank=True, null=True)
+	start = models.CharField(max_length=50, null=True)
+	end = models.CharField(max_length=50, null=True)
+	is_accept = models.IntegerField(default=0)
+
+	def get_absolute_url(self):
+		return reverse( 'retest:eventlabform')
+	def __str__(self):
+				 return str(self.id)
+
+class Eventextensioncable(models.Model):
+	extension_cable = models.ForeignKey(Extension_cables)
+	date = models.DateField(blank=True, null=True)
+	start = models.CharField(max_length=50, null=True)
+	end = models.CharField(max_length=50, null=True)
+	is_accept = models.IntegerField(default=0)	
+
+	def get_absolute_url(self):
+		return reverse( 'retest:eventcableform')
+	def __str__(self):
+				 return str(self.id)
+
+
+class Eventclassroom(models.Model):
+	classroom = models.ForeignKey(Classroom)
+	date = models.DateField(blank=True, null=True)
+	start = models.CharField(max_length=50, null=True)
+	end = models.CharField(max_length=50, null=True)
+	is_accept = models.IntegerField(default=0)
+
+	def get_absolute_url(self):
+		return reverse( 'retest:eventclassroomform')
+	def __str__(self):
+				 return str(self.id)
+
+
+class Eventauditorium(models.Model):
+	auditorium = models.ForeignKey(Auditoriums)
+	date = models.DateField(blank=True, null=True)
+	start = models.CharField(max_length=50, null=True)
+	end = models.CharField(max_length=50, null=True)
+	is_accept = models.IntegerField(default=0)
+
+	def get_absolute_url(self):
+		return reverse( 'retest:eventauditoriumform')
+	def __str__(self):
+				 return str(self.id)
+
+class Eventmikesystem(models.Model):
+	mike_system = models.ForeignKey(Mikesystems)
+	date = models.DateField(blank=True, null=True)
+	start = models.CharField(max_length=50, null=True)
+	end = models.CharField(max_length=50, null=True)
+	is_accept = models.IntegerField(default=0)
+
+	def get_absolute_url(self):
+		return reverse( 'retest:eventmikesystemform')
+	def __str__(self):
+				 return str(self.id)	
+
+class Eventgraphicshall(models.Model):
+	graphics_hall = models.ForeignKey(Graphicshalls)
+	date = models.DateField(blank=True, null=True)
+	start = models.CharField(max_length=50, null=True)
+	end = models.CharField(max_length=50, null=True)
+	is_incharge = models.BooleanField(default=False)
+	is_ashok = models.BooleanField(default=False)
+	is_principal = models.BooleanField(default=False)
+
+	def get_absolute_url(self):
+		return reverse( 'retest:eventgraphicshallform')
+	def __str__(self):
+				 return str(self.id)			 
+
 
