@@ -340,27 +340,27 @@ def classroomretreq(request, eventclassroom_id):
 
 
 def cabledetails(request, eventextensioncable_id):
-    a = User.objects.get(username='Gokul')
+    a = User.objects.get(username='gokul')
     try:
         eventextensioncable= Eventextensioncable.objects.get(pk=eventextensioncable_id)
-    except Eventextensioncable.DoesNotExist:
-        raise Http404("Request does not exit")
-    return render(request, 'event/cabledetails.html' , { 'eventextensioncable' : eventextensioncable , 'a' : a })
+    except Eventprojector.DoesNotExist:
+        raise Http404("Request does not exit")    
+    return render(request, 'event/cabledetails.html' , { 'eventextensioncable' : eventextensioncable , 'a' : a  })
 
 def cableaccept(request, eventextensioncable_id):
     eventextensioncable = get_object_or_404(Eventextensioncable, pk=eventextensioncable_id)
     if request.method == 'POST':
-        eventextensioncable.is_accept = eventextensioncable.is_accept+1
+        eventextensioncable.is_accept = eventextensioncable.is_accept + 1
         eventextensioncable.save(update_fields=['is_accept'])
-        if eventextensioncable.is_accept == 3 :
+        if eventextensioncable.is_accept == 3:
             eventextensioncable.extension_cable.available = False
             eventextensioncable.extension_cable.save(update_fields=['available'])
-    return render(request, 'event/cabledetails.html' , {'eventextensioncable' : eventextensioncable })
+    return render(request, 'event/cabledetails.html' , {'eventextensioncable' : eventextensioncable})
+
 def cableretreq(request, eventextensioncable_id):
-    a = User.objects.get(username='Gokul')
+    a = User.objects.get(username='gokul')
     try:
         eventextensioncable= Eventextensioncable.objects.get(pk=eventextensioncable_id)
     except Eventextensioncable.DoesNotExist:
         raise Http404("Request does not exit")
-    return render(request, 'event/cableretreq.html' , {'eventextensioncable' : eventextensioncable , 'a' : a})
-
+    return render(request, 'event/cableretreq.html' , { 'eventextensioncable' : eventextensioncable , 'a' : a })
