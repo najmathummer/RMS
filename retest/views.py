@@ -282,31 +282,31 @@ def auditretreq(request, eventauditorium_id):
 
 
 
-def mikedetails(request, eventmike_id):
+def mikedetails(request, eventmikesystem_id):
     a = User.objects.get(username='gokul')
     try:
-        eventmike= Eventmike.objects.get(pk=eventmike_id)
-    except Eventmike.DoesNotExist:
+        eventmikesystem= Eventmikesystem.objects.get(pk=eventmikesystem_id)
+    except Eventmikesystem.DoesNotExist:
         raise Http404("Request does not exit")    
-    return render(request, 'event/mikedetails.html' , { 'eventmike' : eventmike , 'a' : a  })
+    return render(request, 'event/mikedetails.html' , { 'eventmikesystem' : eventmikesystem , 'a' : a  })
 
-def mikeaccept(request, eventmike_id):
-    eventmike = get_object_or_404(Eventmike, pk=eventmike_id)
+def mikeaccept(request, eventmikesystem_id):
+    eventmikesystem = get_object_or_404(Eventmikesystem, pk=eventmikesystem_id)
     if request.method == 'POST':
-        eventmike.is_accept = eventmike.is_accept + 1
-        eventmike.save(update_fields=['is_accept'])
-        if eventmike.is_accept == 3:
-            eventmike.mike.available = False
-            eventmike.mike.save(update_fields=['available'])
+        eventmikesystem.is_accept = eventmikesystem.is_accept + 1
+        eventmikesystem.save(update_fields=['is_accept'])
+        if eventmikesystem.is_accept == 3:
+            eventmikesystem.mike_system.available = False
+            eventmikesystem.mike_system.save(update_fields=['available'])
     return render(request, 'event/mikedetails.html' , {'eventmike' : eventmike})
 
-def mikeretreq(request, eventmike_id):
+def mikeretreq(request, eventmikesystem_id):
     a = User.objects.get(username='gokul')
     try:
-        eventmike= Eventmike.objects.get(pk=eventmike_id)
-    except Eventmike.DoesNotExist:
+        eventmikesystem= Eventmikesystem.objects.get(pk=eventmikesystem_id)
+    except Eventmikesystem.DoesNotExist:
         raise Http404("Request does not exit")
-    return render(request, 'event/mikeretreq.html' , { 'eventmike' : eventmike , 'a' : a })
+    return render(request, 'event/mikeretreq.html' , { 'eventmikesystem' : eventmikesystem , 'a' : a })
 
 
 
