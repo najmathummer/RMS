@@ -48,7 +48,7 @@ def login_user(request):
                 if user.groups.filter(name='hod').exists():
                     return render(request, 'retest/hod.html', {'u' : u, 'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests, 'graphicshall_requests' : graphicshall_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests})
                 elif user.groups.filter(name='principal').exists():
-                	return render(request, 'retest/principal.html', {'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests})
+                	return render(request, 'retest/principal.html', {'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests, 'graphicshall_requests':graphicshall_requests})
                 elif user.groups.filter(name='Rep').exists():
                 	
                 	return render(request, 'retest/home.html', {'all_requests' : all_requests,'u':u})
@@ -60,7 +60,7 @@ def login_user(request):
                     return render(request, 'event/ashok.html', {})    
                 elif user.groups.filter(name='Event_incharge').exists():
                     
-                    return render(request, 'event/incharge.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'u' : u, 'classroom_requests':classroom_requests})
+                    return render(request, 'event/incharge.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'u' : u, 'classroom_requests':classroom_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests':mikesystem_requests})
                 elif user.groups.filter(name='Event_coord').exists():
                     
                     return render(request, 'event/chair.html', { 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests , 'u' : u})
@@ -255,57 +255,58 @@ def labretreq(request, eventlab_id):
 
 
 def auditoriumdetails(request, eventauditorium_id):
-    a = User.objects.get(username='Gokul')
+    a = User.objects.get(username='gokul')
     try:
         eventauditorium= Eventauditorium.objects.get(pk=eventauditorium_id)
     except Eventauditorium.DoesNotExist:
-        raise Http404("Request does not exit")
-    return render(request, 'event/auditoriumdetails.html' , { 'eventauditorium' : eventauditorium , 'a' : a })
+        raise Http404("Request does not exit")    
+    return render(request, 'event/auditoriumdetails.html' , { 'eventauditorium' : eventauditorium , 'a' : a  })
 
 def auditoriumaccept(request, eventauditorium_id):
     eventauditorium = get_object_or_404(Eventauditorium, pk=eventauditorium_id)
     if request.method == 'POST':
-        eventauditorium.is_accept = eventauditorium.is_accept+1
+        eventauditorium.is_accept = eventauditorium.is_accept + 1
         eventauditorium.save(update_fields=['is_accept'])
         if eventauditorium.is_accept == 3:
-            eventauditorium.audi.available = False
-            eventauditorium.audi.save(update_fields=['available'])
-    return render(request, 'event/auditoriumdetails.html' , {'eventauditorium' : eventauditorium })
+            eventauditorium.auditorium.available = False
+            eventauditorium.auditorium.save(update_fields=['available'])
+    return render(request, 'event/auditoriumdetails.html' , {'eventauditorium' : eventauditorium})
+
 def auditretreq(request, eventauditorium_id):
-    a = User.objects.get(username='Gokul')
+    a = User.objects.get(username='gokul')
     try:
         eventauditorium= Eventauditorium.objects.get(pk=eventauditorium_id)
     except Eventauditorium.DoesNotExist:
         raise Http404("Request does not exit")
-    return render(request, 'event/auditretreq.html' , { 'eventauditorium' : eventauditorium , 'a' : a})
+    return render(request, 'event/auditretreq.html' , { 'eventauditorium' : eventauditorium , 'a' : a })
 
 
 
-def mikedetails(request, eventmikesystem_id):
-    a = User.objects.get(username='Gokul')
+def mikedetails(request, eventmike_id):
+    a = User.objects.get(username='gokul')
     try:
-        eventmikesystem= Eventmikesystem.objects.get(pk=eventmikesystem_id)
-    except Eventmikesystem.DoesNotExist:
-        raise Http404("Request does not exit")
-    return render(request, 'event/mikedetails.html' , { 'eventmikesystem' : eventmikesystem , 'a' : a })
+        eventmike= Eventmike.objects.get(pk=eventmike_id)
+    except Eventmike.DoesNotExist:
+        raise Http404("Request does not exit")    
+    return render(request, 'event/mikedetails.html' , { 'eventmike' : eventmike , 'a' : a  })
 
-def mikeaccept(request, eventmikesystem_id):
-    eventmikesystem = get_object_or_404(Eventmikesystem, pk=eventmikesystem_id)
+def mikeaccept(request, eventmike_id):
+    eventmike = get_object_or_404(Eventmike, pk=eventmike_id)
     if request.method == 'POST':
-        eventmikesystem.is_accept = eventmikesystem.is_accept+1
-        eventmikesystem.save(update_fields=['is_accept'])
-        if eventmikesystem.is_accept == 3 :
-            eventmikesystem.mike.available = False
-            eventmikesystem.mike.save(update_fields=['available'])
-    return render(request, 'event/mikedetails.html' , {'eventmikesystem' : eventmikesystem })
+        eventmike.is_accept = eventmike.is_accept + 1
+        eventmike.save(update_fields=['is_accept'])
+        if eventmike.is_accept == 3:
+            eventmike.mike.available = False
+            eventmike.mike.save(update_fields=['available'])
+    return render(request, 'event/mikedetails.html' , {'eventmike' : eventmike})
 
-def mikeretreq(request, eventmikesystem_id):
-    a = User.objects.get(username='Gokul')
+def mikeretreq(request, eventmike_id):
+    a = User.objects.get(username='gokul')
     try:
-        eventmikesystem= Eventmikesystem.objects.get(pk=eventmikesystem_id)
-    except Eventmikesystem.DoesNotExist:
+        eventmike= Eventmike.objects.get(pk=eventmike_id)
+    except Eventmike.DoesNotExist:
         raise Http404("Request does not exit")
-    return render(request, 'event/mikeretreq.html' , { 'eventmikesystem' : eventmikesystem , 'a' : a})
+    return render(request, 'event/mikeretreq.html' , { 'eventmike' : eventmike , 'a' : a })
 
 
 
