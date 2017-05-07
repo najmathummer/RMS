@@ -77,7 +77,62 @@
           <li class="active" style="height: 28px;"><a href="#"><i class="fa fa-home"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="retest/login.html"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        {% for request in all_requests %}
+            {% if request.is_hod %}
+              <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="color:#ff0000" ></span>&nbsp; Notification      
+              </a></li>
+            {% endif %}
+          {% endfor %}
+          {% for request in projector_requests %}
+            {% if request.is_accept == '2' %}
+              <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="color:#ff0000" ></span>&nbsp; Notification      
+              </a></li>
+            {% endif %}
+          {% endfor %} 
+          
+                    {% for request in lab_requests %}
+            {% if request.is_accept == '2' %}
+              <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="color:#ff0000" ></span>&nbsp; Notification      
+              </a></li>
+            {% endif %}
+          {% endfor %} 
+                    {% for request in extensioncable_requests %}
+            {% if request.is_accept == '2' %}
+              <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="color:#ff0000" ></span>&nbsp; Notification      
+              </a></li>
+            {% endif %}
+          {% endfor %} 
+                    {% for request in mikesystem_requests %}
+            {% if request.is_accept == '2' %}
+              <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="color:#ff0000" ></span>&nbsp; Notification      
+              </a></li>
+            {% endif %}
+          {% endfor %} 
+                    {% for request in auditorium_requests %}
+            {% if request.is_accept == '2' %}
+              <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="color:#ff0000" ></span>&nbsp; Notification      
+              </a></li>
+            {% endif %}
+          {% endfor %} 
+          {% for request in classroom_requests %}
+            {% if request.is_accept == '1' %}
+              <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" style="color:#ff0000" ></span>&nbsp; Notification      
+              </a></li>
+            {% endif %}
+          {% endfor %}  
+          <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" ></span>&nbsp; Notification      
+              </a></li>
+          <li><a href="{% url 'retest:logout_user' %}">
+                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                    </a></li>
         </ul>
       </div>
     </div>
@@ -184,18 +239,7 @@
                 </tbody>
                 {% endfor %}
 
-                {% for request in graphicshall_requests %}
-                <tbody>
-                {% if request.is_accept is 2 %}    
-                  <tr>
-                   <td>Gokul G</td>
-                   <td>{{ request.date }}</td>
-                   <td>{{ request.graphics-hall }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokdetails';">View details</button></td>
-                   </tr>
-                {% endif %}
-                </tbody>
-                {% endfor %}
+                
 
                 {% for request in projector_requests %}
                 <tbody>
@@ -294,18 +338,7 @@
                 </tbody>
                 {% endfor %}
 
-                {% for request in graphicshall_requests %}
-                <tbody>
-                {% if request.is_accept is 3 %}    
-                  <tr>
-                  <td>Gokul G</td>
-                   <td>{{ request.date }}</td>
-                   <td>{{ request.graphics-hall }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokdetails';">View details</button></td>
-                   </tr>
-                {% endif %}
-                </tbody>
-                {% endfor %}
+                
 
                 {% for request in projector_requests %}
                 <tbody>

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>{{ user.username }}</title>
+  <title>name</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -12,24 +12,18 @@
 </head>
 
 <style>
-body {
-     
-    height: 100%;
-    background-image: url('{% static "images/college.jpg"%}');
-   background-size: cover;
-   background-repeat: no-repeat;
-    
-   
-    }
-
-
-  body, html {
+    body, html {
     height: 100%;
     margin: 0;
 
   }
-
-  .navbar navbar-inverse{
+  .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }
+ .a{
       height: 28px;
   }
     
@@ -44,7 +38,7 @@ body {
 
    .sidenav {
       padding-top: 20px;
-      background-color: #f1f1f1;
+      
       height: 100%;
   }
 
@@ -53,7 +47,7 @@ body {
 /* On small screens, set height to 'auto' for sidenav and grid */
   @media screen and (max-width: 767px) {
       .sidenav {
-        height: auto;
+        height:auto;
         padding: 15px;
   }
 
@@ -63,8 +57,7 @@ body {
 
 <body>
   
-
-  <nav class="navbar navbar-inverse">
+  <nav class=" a navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -79,11 +72,9 @@ body {
           <li class="active"><a href="#"><i class="fa fa-home"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-
           <li><a href="{% url 'retest:logout_user' %}">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
                     </a></li>
-
         </ul>
       </div>
     </div>
@@ -95,52 +86,41 @@ body {
       
   
   <div class="btn-group btn-group-justified"  style="width: 100%;">
-            <a href="{% url 'retest:eventprojectorform' %}" class="btn btn-primary " role="button">Projector</a>
-            <a href="{% url 'retest:eventlabform' %}" class="btn btn-primary " role="button">Labs</a>
-            <a href="{% url 'retest:eventextensioncableform' %}" class="btn btn-primary " role="button">Extension cable</a>
-            <a href="{% url 'retest:eventclassroomform' %}" class="btn btn-primary " role="button">Classrooms</a>
-            <a href="{% url 'retest:eventauditoriumform' %}" class="btn btn-primary " role="button">Auditorium</a> 
-            <a href="{% url 'retest:eventmikesystemform' %}" class="btn btn-primary " role="button">Mike system</a>
-            <a href="{% url 'retest:eventgraphicshallform' %}" class="btn btn-primary " role="button">Graphics hall</a>  
+            <a href="{% url 'retest:eventprojectorform' %}" class="btn btn-warning " role="button">Projector</a>
+            <a href="{% url 'retest:eventlabform' %}" class="btn btn-warning " role="button">Labs</a>
+            <a href="{% url 'retest:eventextensioncableform' %}" class="btn btn-warning " role="button">Extension cable</a>
+            <a href="{% url 'retest:eventclassroomform' %}" class="btn btn-warning " role="button">Classrooms</a>
+            <a href="{% url 'retest:eventauditoriumform' %}" class="btn btn-warning " role="button">Auditorium</a> 
+            <a href="{% url 'retest:eventmikesystemform' %}" class="btn btn-warning " role="button">Mike system</a>
+            <a href="{% url 'retest:eventgraphicshallform' %}" class="btn btn-warning " role="button">Graphics hall</a>  
     
   </div></div></div>
-  <div class="container" style="margin-top: 10px;">
-  <div class="container text-center">  
+  
+  <div class="text-center">    
     <div class="row content">
-      <div class="col-sm-2 sidenav">
+      <div class="col-sm-2 sidenav navbar-inverse" style="color: #ffffff">
         <p>My Profile</p>
-        <img src="#" alt="" class="img-circle" height="65" width="65" alt="" />
-        <h4><b>{{user.username}}</b></h4>
-        <p>{{users.batch}}</p>
-        <p>IEEE Chairman</p>
-        <p>{{users.dept}}</p>
-        <p>College of Engineering, Chengannur</p>
+              <ul class="nav nav-tabs nav-stacked ">
+
+                <li><img src="{{ u.allusers.avatar.url }}" alt="" class="img-circle" height="120" width="100" alt="" /></li>
+                <li><h4><b>{{u.username}}</b></h4></li>
+                <li role="separator" class="divider"></li>
+                <li><p>{{u.rep.semester}}{{ u.rep.batch }}</p></li>
+                <li role="separator" class="divider"></li>
+                <li><p>Technical Coordinator</p></li>
+                <li role="separator" class="divider"></li>
+                <li><p>{{u.rep.dept}}</p></li>
+              </ul>
       </div>
 
-      
-       <!-- <div class="panel panel-default text-left">
-          <div class="panel-body">
-            <a href="{% url 'retest:eventprojectorform' %}" class="btn btn-success " role="button">Request for projector</a>
-            <a href="{% url 'retest:eventlabform' %}" class="btn btn-success " role="button">Request for labs</a>
-            <a href="{% url 'retest:eventextensioncableform' %}" class="btn btn-success " role="button">Request for extension cable</a>
-            <a href="{% url 'retest:eventclassroomform' %}" class="btn btn-success " role="button">Request for classrooms</a>
-            <a href="{% url 'retest:eventauditoriumform' %}" class="btn btn-success " role="button">Request for auditorium</a> 
-            <a href="{% url 'retest:eventmikesystemform' %}" class="btn btn-success " role="button">Request for mike system</a>
-            <a href="{% url 'retest:eventgraphicshallform' %}" class="btn btn-success " role="button">Request for Graphics hall</a>
-          </div>-->
-        
-
-        <div class="col-sm-9">
-          <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" data-toggle="tooltip" title="Click to open and close it">Request Sent</a>
-                </h4>
-              </div>
-              <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class="table" style="text-align: left;">
+      <div class="col-sm-9" style=" margin-left:50px;">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#home">Request Sent</a></li>
+          <li><a href="#menu1">Accepted Requests</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <table class="table" style="text-align: left;">
               <thead>
               
               <tr>
@@ -154,7 +134,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.classroom }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/classroomdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/classretreq';" class="btn btn-warning" >View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -163,7 +143,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/labretreq';"  class="btn btn-warning" >View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -172,7 +152,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    td>{{ request.mike_system }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikeretreq';"  class="btn btn-warning" >View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -181,7 +161,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.auditorium }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/auditoriumdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditretreq';"  class="btn btn-warning" >View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -190,7 +170,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cableretreq';"  class="btn btn-warning" >View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -198,8 +178,8 @@ body {
               <tbody>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
-                   td>{{ request.projector }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projectordetails';">View details</button></td>
+                   <td>{{ request.projector }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/projectorretreq';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -208,24 +188,15 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    td>{{ request.graphics_hall }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokretreq';"  class="btn btn-warning" >View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
             </table>
-                </div>
-                
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" data-toggle="tooltip" title="Click to open and close it">Accepted Request</a>
-                </h4>
-              </div>
-              <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class="table" style="text-align: left;">
+
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <table class="table" style="text-align: left;">
               <thead>
               
               <tr>
@@ -241,7 +212,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.auditorium }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/auditoriumdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -254,7 +225,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cableretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}  
                 </tbody>
@@ -267,7 +238,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.classroom }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/classroomdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/classretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -280,7 +251,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/labretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -293,7 +264,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                   <td>{{ request.mike_system }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikeretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -306,7 +277,7 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.graphics_hall }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -319,23 +290,25 @@ body {
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.projector }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projectordetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/projectorretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %} 
                 </tbody>
                 {% endfor %}
             </table>
-
-            </table>
-                </div>
-                
-              </div>
-            </div>
           </div>
         </div>
+        <script>
+          $(document).ready(function(){
+          $(".nav-tabs a").click(function(){
+          $(this).tab('show');
+          });
+          });
+        </script>
       </div>
-    </div>  
+    </div>
   </div>
 </div>
+      
 </body>
 </html>

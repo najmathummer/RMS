@@ -12,27 +12,18 @@
 </head>
 
 <style>
-body {
-     
-    height: 100%;
-    background-image: url('{% static "images/college.jpg"%}');
-   background-size: cover;
-   background-repeat: no-repeat;
-    
-   
-    }
-
-
-  body, html {
+    body, html {
     height: 100%;
     margin: 0;
 
   }
-
-  
-
-
-  .navbar navbar-inverse{
+  .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
+    }
+ .a{
       height: 28px;
   }
     
@@ -46,8 +37,8 @@ body {
   }
 
    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
+     
+      margin-top: -20px;
       height: 100%;
   }
 
@@ -56,8 +47,8 @@ body {
 /* On small screens, set height to 'auto' for sidenav and grid */
   @media screen and (max-width: 767px) {
       .sidenav {
-        height: auto;
-        padding: 15px;
+        height:auto;
+       
   }
 
   .row.content {height:auto;} 
@@ -65,9 +56,8 @@ body {
   </style>
 
 <body>
-  <div class="bg"><img src="images/college.jpg"></div> 
-  <!--<div class="page header"><h4>System Management System</h4></div>--> 
-  <nav class="navbar navbar-inverse">
+  
+  <nav class=" a navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -82,6 +72,9 @@ body {
           <li class="active"><a href="#"><i class="fa fa-home"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">
+                <span class="glyphicon glyphicon-bullhorn" aria-hidden="true" ></span>&nbsp; Notification      
+              </a></li>
           <li><a href="{% url 'retest:logout_user' %}">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
                     </a></li>
@@ -89,109 +82,91 @@ body {
       </div>
     </div>
   </nav>
+
 <!--profile section-->
-<div class="container">
-  <div class="container text-center">    
+
+  <div class="text-center">    
     <div class="row content">
-      <div class="col-sm-2 sidenav">
+      <div class="col-sm-2 sidenav navbar-inverse" style="color: #ffffff">
         <p>My Profile</p>
-        <img src="#" alt="" class="img-circle" height="65" width="65" alt="" />
-        <h4><b>{{user.username}}</b></h4>
-        <p>{{users.batch}}</p>
-        <p>Class Representitive</p>
-        <p>{{users.dept}}</p>
+              <ul class="nav nav-tabs nav-stacked ">
+
+                <li><img src="{{ u.allusers.avatar.url }}" alt="" class="img-circle" height="120" width="100" alt="" /></li>
+                <li><h4><b>{{u.username}}</b></h4></li>
+                <li role="separator" class="divider"></li>
+                <li><p>{{u.rep.semester}}{{ u.rep.batch }}</p></li>
+                <li role="separator" class="divider"></li>
+                <li><p>Class Representitive</p></li>
+                <li role="separator" class="divider"></li>
+                <li><p>{{u.rep.dept}}</p></li>
+               
+              </ul>
       </div>
 
-      <div class="col-sm-9">
-        <div class="panel panel-default text-left">
-          <div class="panel-body">
-            <a href="{% url 'retest:retestform' %}" class="btn btn-success " role="button">Request for retest</a>
-          </div>
-        </div>
+      <div class="col-sm-9" >
+        <a href="{% url 'retest:retestform' %}" class="btn btn-warning " role="button">Request for retest</a>
+      </div>
 
-        <div class="col-sm-9">
-          <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" data-toggle="tooltip" title="Click to open and close it">Request Sent</a>
-                </h4>
-              </div>
-              <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class="table" style="text-align: left;">
+      <div class="col-sm-9" style=" margin-left:50px;">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#home">Request Sent</a></li>
+          <li><a href="#menu1">Accepted Requests</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <table class="table" style="text-align: left;">
               <thead>
-              
-              <tr>
+                <tr>
                     <th>Requested by</th>
                     <th>Requested on</th>
-                  </tr>
+                </tr>
+              </thead>
+              {% for request in all_requests %}
+               {% if request.dept == u.rep.dept %}
+              <tbody>
+                <tr>
+                   <td>{{ request.name }}</td>
+                   <td>{{ request.date }}</td>
+                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';" class="btn btn-warning">View details</button></td>
+                <tr>
+              </tbody>
+              {% endif %}
+              {% endfor %}
+            </table>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <table class="table" style="text-align: left;">
+              <thead>
+                <tr>
+                    <th>Requested by</th>
+                    <th>Requested on</th>
+                </tr>
               </thead>
               {% for request in all_requests %}
               <tbody>
-                
-                
-                  
-                       
-                  <tr>
+              {% if request.is_principal %}       
+                <tr>
                    <td>{{ request.name }}</td>
                    <td>{{ request.date }}</td>
-                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';">View details</button></td>
-                   <tr>
-                  
-                          
-                   
-                  
+                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';"class="btn btn-warning">View details</button></td>
+                <tr>
+              {% endif %}
               </tbody>
               {% endfor %}
             </table>
-                </div>
-                
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" data-toggle="tooltip" title="Click to open and close it">Accepted Request</a>
-                </h4>
-              </div>
-              <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class="table" style="text-align: left;">
-              <thead>
-              
-              <tr>
-                    <th>Requested by</th>
-                    <th>Requested on</th>
-                  </tr>
-              </thead>
-              {% for request in all_requests %}
-              <tbody>
-                
-                
-                  
-                  {% if request.is_principal %}       
-                  <tr>
-                   <td>{{ request.name }}</td>
-                   <td>{{ request.date }}</td>
-                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';">View details</button></td>
-                   <tr>
-                  {% endif %}
-                          
-                   
-                  
-              </tbody>
-              {% endfor %}
-            </table>
-                </div>
-                
-              </div>
-            </div>
           </div>
         </div>
+        <script>
+          $(document).ready(function(){
+          $(".nav-tabs a").click(function(){
+          $(this).tab('show');
+          });
+          });
+        </script>
       </div>
-    </div>  
+    </div>
   </div>
 </div>
+      
 </body>
 </html>

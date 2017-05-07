@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,8 +10,8 @@
 
     
   </head>
-  <body>
-  <nav class="navbar navbar-inverse">
+ 
+  <nav class="navbar navbar-inverse"> 
     
     <div class="container-fluid">
       <div class="navbar-header">
@@ -39,15 +40,15 @@
   
   <div class="row">
     
-    <div class="col-sm-12 col-md-7">
+    <div class="col-sm-12">
       <div class="panel panel-default">
         <div class="panel-body">
           
-          <form class="form_horizontal" action="" method="post" enctype="multipart/form-data" >
+          <form class="form_horizontal" action="" method="post" enctype="multipart/form-data" style="align-content: center;" >
             {% csrf_token %}
             {% include 'retest/form-template.html' %}
             <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
+              <div class="col-sm-10" >
                 <button type="submit" class="btn btn-success">Submit</button>
                 
               </div>

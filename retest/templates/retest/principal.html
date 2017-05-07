@@ -9,26 +9,22 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
 <style>
-
- 
-    
-
-  body {
-     
+    body, html {
     height: 100%;
-    background-image: url('{% static "images/college.jpg"%}');
-   background-size: cover;
-   background-repeat: no-repeat;
-    
+    margin: 0;
+
+  }
+  .divider {
+        height: 1px;
+        margin: 9px 0;
+        overflow: hidden;
+        background-color: #e5e5e5;
     }
-
-
-  .navbar navbar-inverse {
-     height: 20px;
+ .a{
+      height: 28px;
   }
     
   .affix {
@@ -42,7 +38,7 @@
 
    .sidenav {
       padding-top: 20px;
-      background-color: #f1f1f1;
+      
       height: 100%;
   }
 
@@ -51,7 +47,7 @@
 /* On small screens, set height to 'auto' for sidenav and grid */
   @media screen and (max-width: 767px) {
       .sidenav {
-        height: auto;
+        height:auto;
         padding: 15px;
   }
 
@@ -60,9 +56,8 @@
   </style>
 
 <body>
-   
-  <!--<div class="page header"><h4>System Management System</h4></div>--> 
-  <nav class="navbar navbar-inverse">
+  
+  <nav class=" a navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -73,8 +68,8 @@
         <a class="navbar-brand" href="#">logo</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav" >
-          <li class="active" style="height: 28px;"><a href="#"><i class="fa fa-home"></i></a></li>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#"><i class="fa fa-home"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="{% url 'retest:logout_user' %}">
@@ -84,80 +79,235 @@
       </div>
     </div>
   </nav>
+
 <!--profile section-->
 
-<div class="container">
-  <div class="container text-center">    
+  <div class="text-center">    
     <div class="row content">
-      <div class="col-sm-2 sidenav">
+      <div class="col-sm-2 sidenav navbar-inverse" style="color: #ffffff">
         <p>My Profile</p>
-        <img src="#" alt="" class="img-circle" height="65" width="65" alt="" />
-        <h4><b>{{user.username}}</b></h4>
-        <p>Principal</p>
-        <p>College of Engineering Chengannur</p>
-        
+              <ul class="nav nav-tabs nav-stacked ">
+
+                <li><img src="{{ u.allusers.avatar.url }}" alt="" class="img-circle" height="120" width="100" alt="" /></li>
+                <li><h4><b>{{u.username}}</b></h4></li>
+                <li role="separator" class="divider"></li>
+                <li><p>Principal</p></li>
+                <li role="separator" class="divider"></li>
+                <li><p>College of Engineering Chengannur</p></li>
+              </ul>
       </div>
 
-        <div class="col-sm-9">
+      
 
-          
-
-
-          <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" data-toggle="tooltip" title="Click to open and close it">All Requests</a>
-                </h4>
-              </div>
-              <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">
-                  <table class="table" style="text-align: left;">
+      <div class="col-sm-9" style=" margin-left:50px;">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#home">All Requests</a></li>
+          <li><a href="#menu1">Approved Requests</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+             <table class="table" style="text-align: left;">
               <thead>
-              
               <tr>
                     <th>Requested by</th>
                     <th>Requested on</th>
+                    <th>Requested item</th>
                   </tr>
               </thead>
               {% for request in all_requests %}
               <tbody>
-                
-                
-                  
-                  {% if request.is_hod %}       
+                {% if request.is_hod %}       
                   <tr>
                    <td>{{ request.name }}</td>
                    <td>{{ request.date }}</td>
+                   <td>Retest</td>
                    <td><button onclick="location.href= '/retest/{{ request.id }}/request';">View details</button></td>
                    <tr>
                   {% endif %}
-                          
-                   
-                  
-              </tbody>
+                  </tbody>
               {% endfor %}
+              {% for request in extensioncable_requests %}
+                <tbody> 
+                {% if request.is_accept is 2 %}    
+                  <tr>
+                   <td>Gokul G</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.extension_cable }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   </tr>
+                {% endif %}  
+                </tbody>
+                {% endfor %}
+
+                {% for request in classroom_requests %}
+                <tbody>
+                {% if request.is_accept is 1 %}    
+                  <tr>
+                   <td>Gokul G</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.classroom }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/classroomdetails';">View details</button></td>
+                   </tr>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+
+                {% for request in lab_requests %}
+                <tbody>
+                {% if request.is_accept is 2 %}    
+                  <tr>
+                   <td>Gokul G</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.lab }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   </tr>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+
+                {% for request in mikesystem_requests %}
+                <tbody>
+                {% if request.is_accept is 2 %}    
+                  <tr>
+                   <td>Gokul G</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.mike_system }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   </tr>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+
+                
+
+                {% for request in projector_requests %}
+                <tbody>
+                {% if request.is_accept is 2 %}    
+                  <tr>
+                   <td>Gokul G</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.projector }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/projectordetails';">View details</button></td>
+                   </tr>
+                {% endif %} 
+                </tbody>
+                {% endfor %}
             </table>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" data-toggle="tooltip" title="Click to open and close it">Approved Request</a>
-                </h4>
-              </div>
-              <div id="collapse2" class="panel-collapse collapse">
-                <div class="panel-body"><a href="#"></a> </div>
-                <div class="panel-footer"><a href="#"></a></div>
-              </div>
-            </div>
           </div>
+          <div id="menu1" class="tab-pane fade">
+            <table class="table" style="text-align: left;">
+              <thead>
+              <tr>
+                    <th>Requested by</th>
+                    <th>Requested on</th>
+                    <th>Requested item</th>
+                  </tr>
+              </thead>
+              {% for request in all_requests %}
+              <tbody>
+               {% if request.is_principal %}       
+                  <tr>
+                   <td>{{ request.name }}</td>
+                   <td>{{ request.date }}</td>
+                   <td>Retest</td>
+                   <td><button onclick="location.href= '/retest/{{ request.id }}/retreq';">View details</button></td>
+                   <tr>
+                  {% endif %} 
+                  </tbody>
+              {% endfor %}
+              {% for request in auditorium_requests %}
+              <tbody> 
+                {% if request.is_accept is 3  %}     
+                   <tr>
+                   <td>{{ user.username }}</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.auditorium }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditoriumdetails';">View details</button></td>
+                   </tr>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+                
+                {% for request in extensioncable_requests %}
+                <tbody> 
+                {% if request.is_accept is 3 %}    
+                  <tr>
+                   <td>{{ user.username }}</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.extension_cable }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   </tr>
+                {% endif %}  
+                </tbody>
+                {% endfor %}
+
+                {% for request in classroom_requests %}
+                <tbody>
+                {% if request.is_accept is 2 %}    
+                  <tr>
+                   <td>{{ user.username }}</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.classroom }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/classroomdetails';">View details</button></td>
+                   </tr>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+
+                {% for request in lab_requests %}
+                <tbody>
+                {% if request.is_accept is 3 %}    
+                  <tr>
+                   <td>{{ user.username }}</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.lab }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   </tr>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+
+                {% for request in mikesystem_requests %}
+                <tbody>
+                {% if request.is_accept is 3 %}    
+                  <tr>
+                   <td>{{ user.username }}</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.mike_system }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   </tr>
+                {% endif %}
+                </tbody>
+                {% endfor %}
+
+                
+
+                {% for request in projector_requests %}
+                <tbody>
+                {% if request.is_accept is 3 %}    
+                  <tr>
+                  <td>Gokul G</td>
+                   <td>{{ request.date }}</td>
+                   <td>{{ request.projector }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/projectordetails';">View details</button></td>
+                   </tr>
+                {% endif %} 
+                </tbody>
+                {% endfor %}
+              </table>
           </div>
         </div>
-      </div>  
+        <script>
+          $(document).ready(function(){
+          $(".nav-tabs a").click(function(){
+          $(this).tab('show');
+          });
+          });
+        </script>
+      </div>
     </div>
+  </div>
 </div>
+      
 </body>
 </html>
-

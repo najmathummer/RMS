@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
 from django import forms
 
-
-
+from django import forms
+class RetestForm(forms.Form):
+    date = forms.DateField(widget=forms.TextInput(attrs={'class':'datepicker'}))
 
 
 class UserForm(forms.ModelForm):
@@ -13,4 +14,7 @@ class UserForm(forms.ModelForm):
 		fields = ['username', 'password']
 
 
-
+class UserEditForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+    avatar = forms.FileField()

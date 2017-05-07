@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 'retest',
+'widget_tweaks',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -120,20 +121,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
+
 DATE_INPUT_FORMATS = ('%d-%m-%Y')
 AUTH_PROFILE_MODULE = 'retest.UserProfile'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 
-# Host for sending e-mail.
-EMAIL_HOST = 'localhost'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'najmathu8@gmail.com'
+EMAIL_HOST_PASSWORD = 'najmath123'
+EMAIL_PORT = 587
+STATIC_URL = '/static/'
 
-# Port for sending e-mail.
-EMAIL_PORT = 8000
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-# Optional SMTP authentication information for EMAIL_HOST.
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
