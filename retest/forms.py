@@ -14,7 +14,3 @@ class UserForm(forms.ModelForm):
 		fields = ['username', 'password']
 
 
-class UserEditForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-    avatar = forms.FileField()

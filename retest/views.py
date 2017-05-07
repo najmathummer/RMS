@@ -76,22 +76,6 @@ def login_user(request):
             return render(request, 'retest/login.html', {'error_message': 'Invalid login'})
     return render(request, 'retest/login.html')
 
-def user_edit_view(request):
-    if request.method == "POST" and request.FILES['file']:
-        form = UserEditForm(request.POST, request.FILES)
-        if form.is_valid():
-            your_file = request.FILES['file']
-            new_username = form.cleaned_data.get('username')
-            new_password = form.cleaned_data.get('password')
-            user = User.objects.get(username=request.user.username)
-            all_user = allusers.objects.get(user=user)
-            user.username = new_username
-            user.set_password(new_password)
-            user.save()
-            alluser.avatar = your_file
-            alluser.save()
-            return render(request, 'retest/edit.html',{})
-        return HttpResponse("edit.html", {'form' :form})
 
 
     
