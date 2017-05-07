@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^$', views.login_user, name='login_user'),
 	url(r'^logout_user/$', views.logout_user, name='logout_user'),
 	url(r'^retest/homepage/$', views.homepage, name='rms'),
+	url(r'^retest/edit/$', views.user_edit_view, name='user_edit_view'),
 	
 	
 	url(r'^retest/retestform/$',login_required(views.RetestCreate.as_view()), name='retestform'),

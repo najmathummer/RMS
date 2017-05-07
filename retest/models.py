@@ -186,7 +186,7 @@ class Eventextensioncable(models.Model):
 	is_accept = models.IntegerField(default=0)	
 
 	def get_absolute_url(self):
-		return reverse( 'retest:eventcableform')
+		return reverse( 'retest:eventextensioncableform')
 	def __str__(self):
 				 return str(self.id)
 
