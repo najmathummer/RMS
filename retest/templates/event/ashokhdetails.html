@@ -51,10 +51,12 @@
 
 </div>
 <div class="container">
-<form action="{% url 'retest:gaccept' eventgraphicshall.id %} " method="post">
+<form action="{% url 'retest:haccept' eventgraphicshall.id %} " method="post">
     {% csrf_token %}
     
     
+
+
 <input type="submit" value="Submit" />
 </form>
 

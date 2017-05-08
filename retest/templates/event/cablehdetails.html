@@ -37,13 +37,13 @@
   <p>Gokul G<br>IEEE Chairman<br>S6 C<br>College of engineering, Chengannur</p>
   </div>
   <div class="container">
-   <p>Ashok Sir<br>Mechanical Dept<br>College of Engineering, Chengannur</p>
+   <p>{{ user.username }}<br><br>College of engineering, Chengannur</p>
   </div>
   <div class="container">
-  <p>Subject: Permission for accessing Graphics hall.</p>
+  <p>Subject: Permission for accessing extension cable.</p>
   </div>
   <div class="container">
-  <p> I Gokul G (S6 C) IEEE Chairman request the permission to access the graphics hall on {{ Eventgraphicshall.date }} from {{ Eventgraphicshall.fromt }} to {{ Eventgrphicshall.to }}. Kindly permit the request.</p>
+  <p> I Gokul G (S6 C) IEEE Chairman request the permission to access the {{ Eventextensioncable.extension_cable }} on {{ Eventextensioncale.date }} from {{ Eventextensioncable.fromt }} to {{ Eventextensioncable.to }}. Kindly permit the request.</p>
   </div>
   <div class="container">
   <p>Yours faithfully<br>Gokul G</p>
@@ -51,10 +51,8 @@
 
 </div>
 <div class="container">
-<form action="{% url 'retest:gaccept' eventgraphicshall.id %} " method="post">
+<form action="{% url 'retest:hcableaccept' eventextensioncable.id %} " method="post">
     {% csrf_token %}
-    
-    
 <input type="submit" value="Submit" />
 </form>
 

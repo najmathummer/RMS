@@ -119,7 +119,7 @@
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.projector }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projectordetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/projectorindetails';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -128,7 +128,7 @@
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.classroom }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/classroomdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/classroomidetails';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -137,7 +137,7 @@
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/labindetails';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -146,7 +146,7 @@
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.mike_system }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikeindetails';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -155,7 +155,7 @@
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.auditorium }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/auditoriumdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditoriumindetails';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -164,7 +164,7 @@
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cableindetails';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -173,7 +173,7 @@
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.graphics_hall }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokindetails';">View details</button></td>
                    <tr> 
               </tbody>
               {% endfor %}
@@ -192,12 +192,12 @@
               </thead>
               {% for request in auditorium_requests %}
               <tbody> 
-                {% if request.is_accept is 3  %}     
+                {% if request.is_accept %}     
                    <tr>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.auditorium }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/auditoriumdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditretreq';">View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -205,12 +205,12 @@
                 
                 {% for request in extensioncable_requests %}
                 <tbody> 
-                {% if request.is_accept is 3 %}    
+                {% if request.is_accept %}    
                   <tr>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/cabledetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cableretreq';">View details</button></td>
                    </tr>
                 {% endif %}  
                 </tbody>
@@ -218,12 +218,12 @@
 
                 {% for request in classroom_requests %}
                 <tbody>
-                {% if request.is_accept is 2 %}    
+                {% if request.is_accept %}    
                   <tr>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.classroom }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/classroomdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/classretreq';">View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -231,12 +231,12 @@
 
                 {% for request in lab_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
+                {% if request.is_accept %}    
                   <tr>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/labretreq';">View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -244,12 +244,12 @@
 
                 {% for request in mikesystem_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
+                {% if request.is_accept %}    
                   <tr>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                   <td>{{ request.mike_system }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/mikedetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikeretreq';">View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -257,12 +257,12 @@
 
                 {% for request in graphicshall_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
+                {% if request.is_accept %}    
                   <tr>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.graphics_hall }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokretreq';">View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -270,12 +270,12 @@
 
                 {% for request in projector_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
+                {% if request.is_accept %}    
                   <tr>
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.projector }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projectordetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/projectorretreq';">View details</button></td>
                    </tr>
                 {% endif %} 
                 </tbody>

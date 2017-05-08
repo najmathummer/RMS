@@ -115,12 +115,12 @@
               
               {% for request in mikesystem_requests %}
               <tbody>
-                {% if request.is_accept is 1 %}
-                {% if request.mike.sec.head == u %}
+                {% if request.is_incharge %}
+                {% if request.mike_system.sec.head == u %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
-                   <td>{{ request.mike }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projecterdetails';">View details</button></td>
+                   <td>{{ request.mike_system }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikehdetails';">View details</button></td>
                    </tr>
                  {% endif %}  
                 {% endif %}   
@@ -129,12 +129,12 @@
 
               {% for request in auditorium_requests %}
               <tbody>
-                {% if request.is_accept is 1 %}
+                {% if request.is_incharge %}
                 
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
-                   <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   <td>{{ request.auditorium }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditoriumhdetails';">View details</button></td>
                    </tr>
                 {% endif %} 
                 
@@ -143,12 +143,12 @@
 
               {% for request in extensioncable_requests %}
               <tbody> 
-                {% if request.is_accept is 1 %}
+                {% if request.is_incharge %}
                 {% if request.extension_cable.sec.head == u %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}cabledetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cablehdetails';">View details</button></td>
                    </tr>
                    {% endif %} 
                 {% endif %}  
@@ -168,12 +168,12 @@
               
               {% for request in mikesystem_requests %}
               <tbody>
-                {% if request.is_accept is 3 %}
+                {% if request.is_accept %}
                 {% if request.mike.sec.head == u %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.mike }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/projecterdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikeretreq';">View details</button></td>
                    </tr>
                  {% endif %}  
                 {% endif %}   
@@ -182,12 +182,12 @@
 
               {% for request in auditorium_requests %}
               <tbody>
-                {% if request.is_accept is 3 %}
+                {% if request.is_accept %}
                 
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labdetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditretreq';">View details</button></td>
                    </tr>
                 {% endif %} 
                 
@@ -196,12 +196,12 @@
 
               {% for request in extensioncable_requests %}
               <tbody> 
-                {% if request.is_accept is 3 %}
+                {% if request.is_accept %}
                 {% if request.extension_cable.sec.head == u %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}cabledetails';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cableretreq';">View details</button></td>
                    </tr>
                    {% endif %} 
                 {% endif %}  

@@ -37,13 +37,13 @@
   <p>Gokul G<br>IEEE Chairman<br>S6 C<br>College of engineering, Chengannur</p>
   </div>
   <div class="container">
-   <p>Ashok Sir<br>Mechanical Dept<br>College of Engineering, Chengannur</p>
+   <p>{{ user.username }}<br><br>College of engineering, Chengannur</p>
   </div>
   <div class="container">
-  <p>Subject: Permission for accessing Graphics hall.</p>
+  <p>Subject: Permission for accessing {{ Eventlab.lab }} .</p>
   </div>
   <div class="container">
-  <p> I Gokul G (S6 C) IEEE Chairman request the permission to access the graphics hall on {{ Eventgraphicshall.date }} from {{ Eventgraphicshall.fromt }} to {{ Eventgrphicshall.to }}. Kindly permit the request.</p>
+  <p> I Gokul G (S6 C) IEEE Chairman request the permission to access the {{ Eventlab.lab }} on {{ Eventlab.date }} from {{ Eventlab.fromt }} to {{ Eventlab.to }}. Kindly permit the request.</p>
   </div>
   <div class="container">
   <p>Yours faithfully<br>Gokul G</p>
@@ -51,11 +51,10 @@
 
 </div>
 <div class="container">
-<form action="{% url 'retest:gaccept' eventgraphicshall.id %} " method="post">
+<form action="{% url 'retest:hlabaccept' eventlab.id %} " method="post">
     {% csrf_token %}
     
-    
-<input type="submit" value="Submit" />
+   <input type="submit" value="Submit" />
 </form>
 
 </div>

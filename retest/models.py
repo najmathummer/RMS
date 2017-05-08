@@ -82,7 +82,7 @@ class Retest(models.Model):
 	is_principal = models.BooleanField(default=False)
 	notify = models.BooleanField(default=False)
 	is_sure = models.BooleanField(default=False)
-	is_rep = models.BooleanField(default=False)
+	
 
 	def get_absolute_url(self):
 		return reverse( 'retest:retestform')
@@ -158,8 +158,9 @@ class Eventprojector(models.Model):
 	date = models.DateField(blank=True, null=True)
 	start = models.CharField(max_length=50, null=True)
 	end = models.CharField(max_length=50, null=True)
-	is_accept = models.IntegerField(default=0)
-
+	is_accept = models.BooleanField(default=False)
+	is_incharge = models.BooleanField(default=False)
+	is_head = models.BooleanField(default=False) 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventprojectorform')
 	def __str__(self):
@@ -171,7 +172,9 @@ class Eventlab(models.Model):
 	date = models.DateField(blank=True, null=True)
 	start = models.CharField(max_length=50, null=True)
 	end = models.CharField(max_length=50, null=True)
-	is_accept = models.IntegerField(default=0)
+	is_accept = models.BooleanField(default=False)
+	is_incharge = models.BooleanField(default=False)
+	is_head = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventlabform')
@@ -183,7 +186,9 @@ class Eventextensioncable(models.Model):
 	date = models.DateField(blank=True, null=True)
 	start = models.CharField(max_length=50, null=True)
 	end = models.CharField(max_length=50, null=True)
-	is_accept = models.IntegerField(default=0)	
+	is_accept = models.BooleanField(default=False)
+	is_incharge = models.BooleanField(default=False)
+	is_head = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventextensioncableform')
@@ -196,7 +201,9 @@ class Eventclassroom(models.Model):
 	date = models.DateField(blank=True, null=True)
 	start = models.CharField(max_length=50, null=True)
 	end = models.CharField(max_length=50, null=True)
-	is_accept = models.IntegerField(default=0)
+	is_accept = models.BooleanField(default=False)
+	is_incharge = models.BooleanField(default=False)
+	
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventclassroomform')
@@ -209,7 +216,9 @@ class Eventauditorium(models.Model):
 	date = models.DateField(blank=True, null=True)
 	start = models.CharField(max_length=50, null=True)
 	end = models.CharField(max_length=50, null=True)
-	is_accept = models.IntegerField(default=0)
+	is_accept = models.BooleanField(default=False)
+	is_incharge = models.BooleanField(default=False)
+	is_head = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventauditoriumform')
@@ -221,7 +230,9 @@ class Eventmikesystem(models.Model):
 	date = models.DateField(blank=True, null=True)
 	start = models.CharField(max_length=50, null=True)
 	end = models.CharField(max_length=50, null=True)
-	is_accept = models.IntegerField(default=0)
+	is_accept = models.BooleanField(default=False)
+	is_incharge = models.BooleanField(default=False)
+	is_head = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventmikesystemform')
@@ -233,9 +244,9 @@ class Eventgraphicshall(models.Model):
 	date = models.DateField(blank=True, null=True)
 	start = models.CharField(max_length=50, null=True)
 	end = models.CharField(max_length=50, null=True)
+	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
-	is_ashok = models.BooleanField(default=False)
-	is_principal = models.BooleanField(default=False)
+	is_head = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventgraphicshallform')

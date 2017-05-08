@@ -28,32 +28,58 @@ urlpatterns = [
 	
 
 	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/ashokdetails$' , views.ashokdetails, name='ashokdetails' ),
-	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/ashokaccept$' , views.ashokaccept, name='ashokaccept' ),
+	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/ashokindetails$' , views.ashokindetails, name='ashokindetails' ),
+	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/ashokhdetails$' , views.ashokhdetails, name='ashokhdetails' ),
+	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/gaccept$' , views.gaccept, name='gaccept' ),
+	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/iaccept$' , views.iaccept, name='iaccept' ),
+	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/haccept$' , views.haccept, name='haccept' ),
 	url(r'^event/(?P<eventgraphicshall_id>[0-9]+)/ashokretreq$' , views.ashokretreq, name='ashokretreq' ),
 
 	
 	url(r'^event/(?P<eventprojector_id>[0-9]+)/projectordetails$' , views.projectordetails, name='projectordetails' ),
 	url(r'^event/(?P<eventprojector_id>[0-9]+)/projectoraccept$' , views.projectoraccept, name='projectoraccept' ),
+	url(r'^event/(?P<eventprojector_id>[0-9]+)/projectorindetails$' , views.projectorindetails, name='projectorindetails' ),
+	url(r'^event/(?P<eventprojector_id>[0-9]+)/iprojectoraccept$' , views.iprojectoraccept, name='iprojectoraccept' ),
+	url(r'^event/(?P<eventprojector_id>[0-9]+)/projectorhdetails$' , views.projectorhdetails, name='projectorhdetails' ),
+	url(r'^event/(?P<eventprojector_id>[0-9]+)/hprojectoraccept$' , views.hprojectoraccept, name='hprojectoraccept' ),
 	url(r'^event/(?P<eventprojector_id>[0-9]+)/projectorretreq$' , views.projectorretreq, name='projectorretreq' ),
 	
 	url(r'^event/(?P<eventlab_id>[0-9]+)/labdetails$' , views.labdetails, name='labdetails' ),
 	url(r'^event/(?P<eventlab_id>[0-9]+)/labaccept$' , views.labaccept, name='labaccept' ),
+	url(r'^event/(?P<eventlab_id>[0-9]+)/labindetails$' , views.labindetails, name='labindetails' ),
+	url(r'^event/(?P<eventlab_id>[0-9]+)/ilabaccept$' , views.ilabaccept, name='ilabaccept' ),
+	url(r'^event/(?P<eventlab_id>[0-9]+)/labhdetails$' , views.labhdetails, name='labhdetails' ),
+	url(r'^event/(?P<eventlab_id>[0-9]+)/hlabaccept$' , views.hlabaccept, name='hlabaccept' ),
 	url(r'^event/(?P<eventlab_id>[0-9]+)/labretreq$' , views.labretreq, name='labretreq' ),
 	
 	url(r'^event/(?P<eventauditorium_id>[0-9]+)/auditoriumdetails$' , views.auditoriumdetails, name='auditoriumdetails' ),
 	url(r'^event/(?P<eventauditorium_id>[0-9]+)/auditoriumaccept$' , views.auditoriumaccept, name='auditoriumaccept' ),
+	url(r'^event/(?P<eventauditorium_id>[0-9]+)/auditoriumindetails$' , views.auditoriumindetails, name='auditoriumindetails' ),
+	url(r'^event/(?P<eventauditorium_id>[0-9]+)/iauditoriumaccept$' , views.iauditoriumaccept, name='iauditoriumaccept' ),
+	url(r'^event/(?P<eventauditorium_id>[0-9]+)/auditoriumhdetails$' , views.auditoriumhdetails, name='auditoriumhdetails' ),
+	url(r'^event/(?P<eventauditorium_id>[0-9]+)/hauditoriumaccept$' , views.hauditoriumaccept, name='hauditoriumaccept' ),
 	url(r'^event/(?P<eventauditorium_id>[0-9]+)/auditretreq$' , views.auditretreq, name='auditretreq' ),
 	
 	url(r'^event/(?P<eventmikesystem_id>[0-9]+)/mikedetails$' , views.mikedetails, name='mikedetails' ),
 	url(r'^event/(?P<eventmikesystem_id>[0-9]+)/mikeaccept$' , views.mikeaccept, name='mikeaccept' ),
+	url(r'^event/(?P<eventmikesystem_id>[0-9]+)/mikeindetails$' , views.mikeindetails, name='mikeindetails' ),
+	url(r'^event/(?P<eventmikesystem_id>[0-9]+)/imikeaccept$' , views.imikeaccept, name='imikeaccept' ),
+	url(r'^event/(?P<eventmikesystem_id>[0-9]+)/mikehdetails$' , views.mikehdetails, name='mikehdetails' ),
+	url(r'^event/(?P<eventmikesystem_id>[0-9]+)/hmikeaccept$' , views.hmikeaccept, name='hmikeaccept' ),
 	url(r'^event/(?P<eventmikesystem_id>[0-9]+)/mikeretreq$' , views.mikeretreq, name='mikeretreq' ),
 	
 	url(r'^event/(?P<eventclassroom_id>[0-9]+)/classroomdetails$' , views.classroomdetails, name='classroomdetails' ),
 	url(r'^event/(?P<eventclassroom_id>[0-9]+)/classroomaccept$' , views.classroomaccept, name='classroomaccept' ),
-	url(r'^event/(?P<eventclassroom_id>[0-9]+)/classroomretreq$' , views.classroomretreq, name='classroomretreq' ),
+	url(r'^event/(?P<eventclassroom_id>[0-9]+)/classroomidetails$' , views.classroomidetails, name='classroomidetails' ),
+	url(r'^event/(?P<eventclassroom_id>[0-9]+)/iclassroomaccept$' , views.iclassroomaccept, name='iclassroomaccept' ),
+	url(r'^event/(?P<eventclassroom_id>[0-9]+)/classretreq$' , views.classretreq, name='classretreq' ),
 	
 	url(r'^event/(?P<eventextensioncable_id>[0-9]+)/cabledetails$' , views.cabledetails, name='cabledetails' ),
 	url(r'^event/(?P<eventextensioncable_id>[0-9]+)/cableaccept$' , views.cableaccept, name='cableaccept' ),
+	url(r'^event/(?P<eventextensioncable_id>[0-9]+)/cableindetails$' , views.cableindetails, name='cableindetails' ),
+	url(r'^event/(?P<eventextensioncable_id>[0-9]+)/icableaccept$' , views.icableaccept, name='icableaccept' ),
+	url(r'^event/(?P<eventextensioncable_id>[0-9]+)/cablehdetails$' , views.cablehdetails, name='cablehdetails' ),
+	url(r'^event/(?P<eventextensioncable_id>[0-9]+)/hcableaccept$' , views.hcableaccept, name='hcableaccept' ),
 	url(r'^event/(?P<eventextensioncable_id>[0-9]+)/cableretreq$' , views.cableretreq, name='cableretreq' ),
 
 
