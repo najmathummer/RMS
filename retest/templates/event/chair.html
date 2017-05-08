@@ -199,20 +199,25 @@
             <table class="table" style="text-align: left;">
               <thead>
               
-              <tr>
+              <tr><th>Withdrawn</th>
                     <th>Requested by</th>
                     <th>Requested on</th>
-                    <th>Reequested item</th>
+                    <th>Requested item</th>
                   </tr>
               </thead>
               {% for request in auditorium_requests %}
               <tbody> 
-                {% if request.is_accept is 3  %}     
+                {% if request.is_accept %}     
                    <tr>
+                   {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.auditorium }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/auditretreq';"  class="btn btn-warning" >View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/auditwretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -220,8 +225,13 @@
                 
                 {% for request in extensioncable_requests %}
                 <tbody> 
-                {% if request.is_accept is 3 %}    
-                  <tr>
+                {% if request.is_accept %}     
+                   <tr>
+                   {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
@@ -233,12 +243,17 @@
 
                 {% for request in classroom_requests %}
                 <tbody>
-                {% if request.is_accept is 2 %}    
-                  <tr>
+                {% if request.is_accept %}     
+                   <tr>
+                   {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.classroom }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/classretreq';"  class="btn btn-warning" >View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/classwretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -246,12 +261,17 @@
 
                 {% for request in lab_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
-                  <tr>
+                {% if request.is_accept %}     
+                   <tr>
+                   {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/labretreq';"  class="btn btn-warning" >View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/labwretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -259,8 +279,13 @@
 
                 {% for request in mikesystem_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
-                  <tr>
+                {% if request.is_accept %}     
+                   <tr>
+                   {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                   <td>{{ request.mike_system }}</td>
@@ -272,12 +297,17 @@
 
                 {% for request in graphicshall_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
-                  <tr>
+                {% if request.is_accept %}     
+                   <tr>
+                   {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.graphics_hall }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokretreq';"  class="btn btn-warning" >View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/ashokwretreq';"  class="btn btn-warning" >View details</button></td>
                    </tr>
                 {% endif %}
                 </tbody>
@@ -285,8 +315,13 @@
 
                 {% for request in projector_requests %}
                 <tbody>
-                {% if request.is_accept is 3 %}    
-                  <tr>
+                {% if request.is_accept %}     
+                   <tr>
+                   {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>{{ user.username }}</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.projector }}</td>

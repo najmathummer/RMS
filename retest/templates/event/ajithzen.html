@@ -106,7 +106,7 @@
           <div id="home" class="tab-pane fade in active">
             <table class="table" style="text-align: left;">
               <thead>
-              <tr>
+              <tr><th>Accepted</th>
                     <th>Requested by</th>
                     <th>Requested on</th>
                     <th>Requested item</th>
@@ -117,6 +117,11 @@
               <tbody>
                 {% if request.is_incharge %}
                 {% if request.mike_system.sec.head == u %}
+                    {% if request.is_head %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.mike_system }}</td>
@@ -130,7 +135,11 @@
               {% for request in auditorium_requests %}
               <tbody>
                 {% if request.is_incharge %}
-                
+                    {% if request.is_head %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.auditorium }}</td>
@@ -145,6 +154,11 @@
               <tbody> 
                 {% if request.is_incharge %}
                 {% if request.extension_cable.sec.head == u %}
+                {% if request.is_head %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
@@ -159,7 +173,7 @@
           <div id="menu1" class="tab-pane fade">
             <table class="table" style="text-align: left;">
               <thead>
-              <tr>
+              <tr><th>Recieved</th>
                     <th>Requested by</th>
                     <th>Requested on</th>
                     <th>Requested item</th>
@@ -169,11 +183,16 @@
               {% for request in mikesystem_requests %}
               <tbody>
                 {% if request.is_accept %}
-                {% if request.mike.sec.head == u %}
+                {% if request.mike_system.sec.head == u %}
+                {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
-                   <td>{{ request.mike }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/mikeretreq';">View details</button></td>
+                   <td>{{ request.mike_system }}</td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/mikehretreq';">View details</button></td>
                    </tr>
                  {% endif %}  
                 {% endif %}   
@@ -183,10 +202,10 @@
               {% for request in auditorium_requests %}
               <tbody>
                 {% if request.is_accept %}
-                
+                  <td></td>
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
-                   <td>{{ request.lab }}</td>
+                   <td>{{ request.auditorium }}</td>
                    <td><button onclick="location.href= '/event/{{ request.id }}/auditretreq';">View details</button></td>
                    </tr>
                 {% endif %} 
@@ -198,10 +217,15 @@
               <tbody> 
                 {% if request.is_accept %}
                 {% if request.extension_cable.sec.head == u %}
+                {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
-                   <td><button onclick="location.href= '/event/{{ request.id }}/cableretreq';">View details</button></td>
+                   <td><button onclick="location.href= '/event/{{ request.id }}/cablehretreq';">View details</button></td>
                    </tr>
                    {% endif %} 
                 {% endif %}  

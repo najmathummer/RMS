@@ -117,7 +117,7 @@ def accepted(request, retest_id):
 
         users = [rep.user for rep in Rep.objects.filter(batch=retest.batch, dept=retest.dept)]
         for user in users:
-            user.email_user(subject='RMS', message='Requests you have sent have been accepted.For more details visit RMS')
+            user.email_user(subject='RMS', message='Your Notifications are Pending')
 
     return render(request, 'retest/request.html' , {'retest': retest})
 
@@ -218,12 +218,28 @@ def gaccept(request, eventgraphicshall_id):
 
 
 def ashokretreq(request, eventgraphicshall_id):
-    a = User.objects.get(username='Gokul')
+    a = User.objects.get(username='gokul')
+    try:
+        eventgraphicshall= Eventgraphicshall.objects.get(pk=eventprojector_id)
+    except Eventgraphicshall.DoesNotExist:
+        raise Http404("Request does not exit")
+    return render(request, 'event/ashokretereq.html' , { 'eventgraphicshall' : eventgraphicshall , 'a' : a })
+def ashokwretreq(request, eventgraphicshall_id):
+    a = User.objects.get(username='gokul')
     try:
         eventgraphicshall= Eventgraphicshall.objects.get(pk=eventgraphicshall_id)
     except Eventgraphicshall.DoesNotExist:
         raise Http404("Request does not exit")
-    return render(request, 'event/ashokretreq.html' , { 'eventgraphicshall' : eventgraphicshall , 'a' : a })
+    return render(request, 'event/ashokwretereq.html' , { 'eventgraphicshall' : eventgraphicshall , 'a' : a })
+def graphicswithdraw(request, eventgraphicshall_id):
+    eventgraphicshall = get_object_or_404(Eventgraphicshall, pk=eventgraphicshall_id)
+    if request.method == 'POST':
+        eventgraphicshall.recieved = True
+        eventgraphicshall.save(update_fields=['recieved'])
+        if eventgraphicshall.recieved == True :
+            eventgraphicshall.graphics_hall.available = True
+            eventgraphicshall.graphics_hall.save(update_fields=['available'])
+    return render(request, 'event/ashokretereq.html' , {'eventgraphicshall' : eventgraphicshall })
 
 
 def projectorindetails(request, eventprojector_id):
@@ -283,6 +299,24 @@ def projectorretreq(request, eventprojector_id):
         raise Http404("Request does not exit")
     return render(request, 'event/projectorretreq.html' , { 'eventprojector' : eventprojector , 'a' : a })
 
+def projectorhretreq(request, eventprojector_id):
+    a = User.objects.get(username='gokul')
+    try:
+        eventprojector= Eventprojector.objects.get(pk=eventprojector_id)
+    except Eventprojector.DoesNotExist:
+        raise Http404("Request does not exit")
+    return render(request, 'event/projectorhretreq.html' , { 'eventprojector' : eventprojector , 'a' : a })
+def projectorrecieved(request, eventprojector_id):
+    eventprojector = get_object_or_404(Eventprojector, pk=eventprojector_id)
+    if request.method == 'POST':
+        eventprojector.recieved = True
+        eventprojector.save(update_fields=['recieved'])
+        if eventprojector.recieved == True:
+            eventprojector.projector.available = True
+            eventprojector.projector.save(update_fields=['available'])
+    return render(request, 'event/projectorretreq.html' , {'eventprojector' : eventprojector})
+
+
 
 
 def labdetails(request, eventlab_id):
@@ -341,6 +375,23 @@ def labretreq(request, eventlab_id):
     except Eventlab.DoesNotExist:
         raise Http404("Request does not exit")
     return render(request, 'event/labretreq.html' , { 'eventlab' : eventlab , 'a' : a })
+def labwretreq(request, eventlab_id):
+    a = User.objects.get(username='gokul')
+    try:
+        eventlab= Eventlab.objects.get(pk=eventlab_id)
+    except Eventlab.DoesNotExist:
+        raise Http404("Request does not exit")
+    return render(request, 'event/labwretreq.html' , { 'eventlab' : eventlab , 'a' : a })
+def labwithdraw(request, eventlab_id):
+    eventlab = get_object_or_404(Eventlab, pk=eventlab_id)
+    if request.method == 'POST':
+        eventlab.recieved = True
+        eventlab.save(update_fields=['recieved'])
+        if eventlab.recieved == True:
+            eventlab.lab.available = True
+            eventlab.lab.save(update_fields=['available'])
+    return render(request, 'event/labretreq.html' , {'eventlab' : eventlab})
+
 
 
 
@@ -398,7 +449,23 @@ def auditretreq(request, eventauditorium_id):
         eventauditorium= Eventauditorium.objects.get(pk=eventauditorium_id)
     except Eventauditorium.DoesNotExist:
         raise Http404("Request does not exit")
-    return render(request, 'event/auditretreq.html' , { 'eventauditorium' : eventauditorium , 'a' : a })
+    return render(request, 'event/auditretereq.html' , { 'eventauditorium' : eventauditorium , 'a' : a })
+def auditwretreq(request, eventauditorium_id):
+    a = User.objects.get(username='gokul')
+    try:
+        eventauditorium= Eventauditorium.objects.get(pk=eventauditorium_id)
+    except Eventauditorium.DoesNotExist:
+        raise Http404("Request does not exit")
+    return render(request, 'event/auditwretereq.html' , { 'eventauditorium' : eventauditorium , 'a' : a })
+def auditwithdraw(request, eventauditorium_id):
+    eventauditorium = get_object_or_404(Eventauditorium, pk=eventauditorium_id)
+    if request.method == 'POST':
+        eventauditorium.recieved = True
+        eventauditorium.save(update_fields=['recieved'])
+        if eventauditorium.recieved == True:
+            eventauditorium.auditorium.available = True
+            eventauditorium.auditorium.save(update_fields=['available'])
+    return render(request, 'event/auditretereq.html' , {'eventauditorium' : eventauditorium})
 
 
 
@@ -458,6 +525,22 @@ def mikeretreq(request, eventmikesystem_id):
         raise Http404("Request does not exit")
     return render(request, 'event/mikeretreq.html' , { 'eventmikesystem' : eventmikesystem , 'a' : a })
 
+def mikehretreq(request, eventmikesystem_id):
+    a = User.objects.get(username='gokul')
+    try:
+        eventmikesystem= Eventmikesystem.objects.get(pk=eventmikesystem_id)
+    except Eventmikesystem.DoesNotExist:
+        raise Http404("Request does not exit")
+    return render(request, 'event/mikehretreq.html' , { 'eventmikesystem' : eventmikesystem , 'a' : a })
+def mikerecieved(request, eventmikesystem_id):
+    eventmikesystem = get_object_or_404(Eventmikesystem, pk=eventmikesystem_id)
+    if request.method == 'POST':
+        eventmikesystem.recieved = True
+        eventmikesystem.save(update_fields=['recieved'])
+        if eventmikesystem.recieved == True:
+            eventmikesystem.mike_system.available = True
+            eventmikesystem.mike_system.save(update_fields=['available'])
+    return render(request, 'event/mikeretreq.html' , {'eventmikesystem' : eventmikesystem})
 
 
 
@@ -502,6 +585,22 @@ def classretreq(request, eventclassroom_id):
     except Eventclassroom.DoesNotExist:
         raise Http404("Request does not exit")
     return render(request, 'event/classretreq.html' , { 'eventclassroom' : eventclassroom , 'a' : a })
+def classwretreq(request, eventclassroom_id):
+    a = User.objects.get(username='gokul')
+    try:
+        eventclassroom= Eventclassroom.objects.get(pk=eventclassroom_id)
+    except Eventclassroom.DoesNotExist:
+        raise Http404("Request does not exit")
+    return render(request, 'event/classwretreq.html' , { 'eventclassroom' : eventclassroom , 'a' : a })
+def classwithdraw(request, eventclassroom_id):
+    eventclassroom = get_object_or_404(Eventclassroom, pk=eventclassroom_id)
+    if request.method == 'POST':
+        eventclassroom.recieved = True
+        eventclassroom.save(update_fields=['recieved'])
+        if eventclassroom.recieved == True:
+            eventclassroom.classroom.available = True
+            eventclassroom.classroom.save(update_fields=['available'])
+    return render(request, 'event/classretreq.html' , {'eventclassroom' : eventclassroom})
 
 
 
@@ -562,3 +661,19 @@ def cableretreq(request, eventextensioncable_id):
     except Eventextensioncable.DoesNotExist:
         raise Http404("Request does not exit")
     return render(request, 'event/cableretreq.html' , { 'eventextensioncable' : eventextensioncable , 'a' : a })
+def cablehretreq(request, eventextensioncable_id):
+    a = User.objects.get(username='gokul')
+    try:
+        eventextensioncable= Eventextensioncable.objects.get(pk=eventextensioncable_id)
+    except Eventextensioncable.DoesNotExist:
+        raise Http404("Request does not exit")
+    return render(request, 'event/cablehretreq.html' , { 'eventextensioncable' : eventextensioncable , 'a' : a })
+def cablerecieved(request, eventextensioncable_id):
+    eventextensioncable = get_object_or_404(Eventextensioncable, pk=eventextensioncable_id)
+    if request.method == 'POST':
+        eventextensioncable.recieved = True
+        eventextensioncable.save(update_fields=['recieved'])
+        if eventextensioncable.recieved == True:
+            eventextensioncable.extension_cable.available = True
+            eventextensioncable.extension_cable.save(update_fields=['available'])
+    return render(request, 'event/cableretreq.html' , {'eventextensioncable' : eventextensioncable})

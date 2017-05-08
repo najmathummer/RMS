@@ -108,7 +108,7 @@
           <div id="home" class="tab-pane fade in active">
             <table class="table" style="text-align: left;">
               <thead>
-              <tr>
+              <tr><th>Accepted</th>
                     <th>Requested by</th>
                     <th>Requested on</th>
                     <th>Requested item</th>
@@ -119,6 +119,11 @@
               <tbody>
                 {% if request.is_incharge %}
                 {% if request.lab.sec.head == u %}
+                {% if request.is_hod %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
@@ -132,6 +137,11 @@
               {% for request in graphicshall_requests %}
               <tbody> 
                 {% if request.is_incharge %}
+                {% if request.is_hod %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                 
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
@@ -147,7 +157,7 @@
           <div id="menu1" class="tab-pane fade">
             <table class="table" style="text-align: left;">
               <thead>
-              <tr>
+              <tr><th>Recieved</th>
                     <th>Requested by</th>
                     <th>Requested on</th>
                     <th>Requested item</th>
@@ -158,6 +168,11 @@
               <tbody>
                 {% if request.is_accept %}
                 {% if request.lab.sec.head == u %}
+                {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
@@ -171,6 +186,11 @@
               {% for request in graphicshall_requests %}
               <tbody> 
                 {% if request.is_accept %}
+                {% if request.recieved %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color:red"></span></td>
+                   {% endif %}
                 
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>

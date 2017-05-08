@@ -161,6 +161,7 @@ class Eventprojector(models.Model):
 	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
 	is_head = models.BooleanField(default=False) 
+	recieved = models.BooleanField(default=False) 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventprojectorform')
 	def __str__(self):
@@ -175,6 +176,7 @@ class Eventlab(models.Model):
 	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
 	is_head = models.BooleanField(default=False) 
+	recieved = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventlabform')
@@ -189,7 +191,7 @@ class Eventextensioncable(models.Model):
 	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
 	is_head = models.BooleanField(default=False) 
-
+	recieved = models.BooleanField(default=False) 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventextensioncableform')
 	def __str__(self):
@@ -203,6 +205,7 @@ class Eventclassroom(models.Model):
 	end = models.CharField(max_length=50, null=True)
 	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
+	recieved = models.BooleanField(default=False) 
 	
 
 	def get_absolute_url(self):
@@ -219,6 +222,7 @@ class Eventauditorium(models.Model):
 	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
 	is_head = models.BooleanField(default=False) 
+	recieved = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventauditoriumform')
@@ -233,7 +237,7 @@ class Eventmikesystem(models.Model):
 	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
 	is_head = models.BooleanField(default=False) 
-
+	recieved = models.BooleanField(default=False) 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventmikesystemform')
 	def __str__(self):
@@ -247,7 +251,7 @@ class Eventgraphicshall(models.Model):
 	is_accept = models.BooleanField(default=False)
 	is_incharge = models.BooleanField(default=False)
 	is_head = models.BooleanField(default=False) 
-
+	recieved = models.BooleanField(default=False) 
 	def get_absolute_url(self):
 		return reverse( 'retest:eventgraphicshallform')
 	def __str__(self):

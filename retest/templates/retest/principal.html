@@ -108,7 +108,7 @@
           <div id="home" class="tab-pane fade in active">
              <table class="table" style="text-align: left;">
               <thead>
-              <tr>
+              <tr><th>Accepted</th>
                     <th>Requested by</th>
                     <th>Requested on</th>
                     <th>Requested item</th>
@@ -118,6 +118,11 @@
               <tbody>
                 {% if request.is_hod %}       
                   <tr>
+                  {% if request.is_principal %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>{{ request.name }}</td>
                    <td>{{ request.date }}</td>
                    <td>Retest</td>
@@ -130,6 +135,11 @@
                 <tbody> 
                 {% if request.is_head %}    
                   <tr>
+                  {% if request.is_accept %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.extension_cable }}</td>
@@ -143,6 +153,11 @@
                 <tbody>
                 {% if request.is_incharge %}    
                   <tr>
+                  {% if request.is_accept %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.classroom }}</td>
@@ -156,6 +171,11 @@
                 <tbody>
                 {% if request.is_head %}    
                   <tr>
+                  {% if request.is_accept %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.lab }}</td>
@@ -169,6 +189,11 @@
                 <tbody>
                 {% if request.is_head %}    
                   <tr>
+                  {% if request.is_accept %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.mike_system }}</td>
@@ -184,6 +209,11 @@
                 <tbody>
                 {% if request.is_head %}    
                   <tr>
+                  {% if request.is_accept %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.projector }}</td>
@@ -195,7 +225,12 @@
                 {% for request in auditorium_requests %}
               <tbody>
                 {% if request.is_head %}
-                
+                <tr>
+                {% if request.is_accept %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.auditorium }}</td>
@@ -208,7 +243,11 @@
                 {% for request in graphicshall_requests %}
               <tbody> 
                 {% if request.is_head %}
-                
+                <tr>{% if request.is_accept %}
+                   <td><span class="glyphicon glyphicon-ok" style="color: green;"></span></td> 
+                   {% else %}
+                   <td><span class="glyphicon glyphicon-remove" style="color: red;"></span></td> 
+                   {% endif %}
                    <td>Gokul G</td>
                    <td>{{ request.date }}</td>
                    <td>{{ request.graphics_hall }}</td>
