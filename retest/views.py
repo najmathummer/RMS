@@ -1,5 +1,5 @@
 #!/usr/bin/python -tt
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from .forms import UserForm
@@ -46,37 +46,94 @@ def login_user(request):
             if user.is_active:
                 login(request, user)
                 if user.groups.filter(name='hod').exists():
-                    return render(request, 'retest/hod.html', {'u' : u, 'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests, 'graphicshall_requests' : graphicshall_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests})
+                    return redirect('/hod')
                 elif user.groups.filter(name='principal').exists():
-                	return render(request, 'retest/principal.html', {'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests, 'graphicshall_requests':graphicshall_requests})
+                	return redirect('/principal')
                 elif user.groups.filter(name='Rep').exists():
-                	
-                	return render(request, 'retest/home.html', {'all_requests' : all_requests,'u':u})
+                	return redirect('/rep')
                 elif user.groups.filter(name='Ajithzen').exists():
-                    
-                    return render(request, 'event/ajithzen.html', {'extensioncable_requests' : extensioncable_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests':mikesystem_requests, 'u':u })
+                    return redirect('/ajithsen')
                 elif user.groups.filter(name='graphics').exists():
-                    
-                    return render(request, 'event/ashok.html', {'graphicshall_requests': graphicshall_requests, 'u':u})    
+                    return redirect('/ashok')
                 elif user.groups.filter(name='Event_incharge').exists():
-                    
-                    return render(request, 'event/incharge.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'u' : u, 'classroom_requests':classroom_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests':mikesystem_requests, 'graphicshall_requests': graphicshall_requests})
+                    return redirect('/incharge')
                 elif user.groups.filter(name='Event_coord').exists():
-                    
-                    return render(request, 'event/chair.html', { 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests , 'u' : u})
+                    return redirect('/chair')
                 elif user.groups.filter(name='IEEE').exists():
-                    
-                    return render(request, 'event/ieee.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'u' : u})
+                    return redirect('/ieee')
                 else:		
                 	return render(request, 'retest/login.html', {'error_message': 'Invalid login'})
-
             else:
                 return render(request, 'retest/login.html', {'error_message': 'Your account has been disabled'})
         else:
             return render(request, 'retest/login.html', {'error_message': 'Invalid login'})
     return render(request, 'retest/login.html')
-
-
+@login_required
+def rep(request):
+    u = request.user
+    all_requests= Retest.objects.all() 
+    return render(request, 'retest/home.html', {'u':u, 'all_requests' : all_requests })
+@login_required
+def hod(request):
+    u = request.user
+    projector_requests = Eventprojector.objects.all()
+    lab_requests = Eventlab.objects.all()
+    extensioncable_requests = Eventextensioncable.objects.all()
+    all_requests= Retest.objects.all() 
+    return render(request, 'retest/hod.html', {'u' : u, 'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests})
+@login_required
+def principal(request):
+    u = request.user
+    projector_requests = Eventprojector.objects.all()
+    classroom_requests = Eventclassroom.objects.all()
+    lab_requests = Eventlab.objects.all()
+    mikesystem_requests = Eventmikesystem.objects.all()
+    extensioncable_requests = Eventextensioncable.objects.all()
+    auditorium_requests = Eventauditorium.objects.all()
+    graphicshall_requests = Eventgraphicshall.objects.all()
+    all_requests= Retest.objects.all() 
+    return render(request, 'retest/principal.html', {'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests, 'u':u })
+@login_required
+def ajithsen(request):
+    u = request.user
+    mikesystem_requests = Eventmikesystem.objects.all()
+    extensioncable_requests = Eventextensioncable.objects.all()
+    auditorium_requests = Eventauditorium.objects.all()
+    return render(request, 'event/ajithzen.html', {'extensioncable_requests' : extensioncable_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests':mikesystem_requests, 'u':u })
+@login_required
+def incharge(request):
+    u = request.user
+    projector_requests = Eventprojector.objects.all()
+    classroom_requests = Eventclassroom.objects.all()
+    lab_requests = Eventlab.objects.all()
+    mikesystem_requests = Eventmikesystem.objects.all()
+    extensioncable_requests = Eventextensioncable.objects.all()
+    auditorium_requests = Eventauditorium.objects.all()
+    graphicshall_requests = Eventgraphicshall.objects.all()
+    return render(request, 'event/incharge.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'u' : u, 'classroom_requests':classroom_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests':mikesystem_requests, 'graphicshall_requests': graphicshall_requests})
+@login_required
+def chair(request):
+    u = request.user
+    projector_requests = Eventprojector.objects.all()
+    classroom_requests = Eventclassroom.objects.all()
+    lab_requests = Eventlab.objects.all()
+    mikesystem_requests = Eventmikesystem.objects.all()
+    extensioncable_requests = Eventextensioncable.objects.all()
+    auditorium_requests = Eventauditorium.objects.all()
+    graphicshall_requests = Eventgraphicshall.objects.all()
+    return render(request, 'event/chair.html', { 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests , 'u' : u})
+@login_required
+def ieee(request):
+    u = request.user
+    projector_requests = Eventprojector.objects.all()
+    extensioncable_requests = Eventextensioncable.objects.all()
+    return render(request, 'event/ieee.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'u' : u})
+@login_required
+def ashok(request):
+    u = request.user
+    lab_requests = Eventlab.objects.all()
+    graphicshall_requests = Eventgraphicshall.objects.all()
+    return render(request, 'event/ashok.html', {'graphicshall_requests': graphicshall_requests, 'u':u,  'lab_requests' : lab_requests}) 
 
     
 @login_required
