@@ -37,12 +37,12 @@ def login_user(request):
         extensioncable_requests = Eventextensioncable.objects.all()
         auditorium_requests = Eventauditorium.objects.all()
         graphicshall_requests = Eventgraphicshall.objects.all()
-        u = User.objects.get(username=username)
         
         
         
 
         if user is not None:
+            u = User.objects.get(username=username)
             if user.is_active:
                 login(request, user)
                 if user.groups.filter(name='hod').exists():
