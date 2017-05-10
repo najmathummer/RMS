@@ -3,17 +3,9 @@ from django.contrib.auth.decorators import login_required
 from . import views
 urlpatterns = [
 	
-	url(r'^retest/$', views.login_user, name='login_user'),
-
-	url(r'^$', views.login_user, name='login_user'),
-	url(r'^rep$', views.rep, name='rep'),
-	url(r'^hod$', views.hod, name='hod'),
-	url(r'^principal$', views.principal, name='principal'),
-	url(r'^ajithsen$', views.ajithsen, name='ajithsen'),
-	url(r'^ashok$', views.ashok, name='ashok'),
-	url(r'^chair$', views.chair, name='chair'),
-	url(r'^incharge$', views.incharge, name='incharge'),
-	url(r'^ieee$', views.ieee, name='ieee'),
+	url(r'^retest/$', views.home, name='home'),
+    url(r'^login$', views.login_user, name='login_user'),
+	url(r'^$', views.home, name='home'),
 	url(r'^logout_user/$', views.logout_user, name='logout_user'),
 	url(r'^retest/homepage/$', views.homepage, name='rms'),
 	
@@ -25,7 +17,7 @@ urlpatterns = [
 	url(r'^retest/(?P<retest_id>[0-9]+)/request$' , views.request, name='request' ),
 	url(r'^retest/(?P<retest_id>[0-9]+)/accepted$' , views.accepted, name='accepted' ),
 	url(r'^retest/(?P<retest_id>[0-9]+)/retreq$' , views.retreq, name='retreq' ),
-	url(r'^event/$', views.login_user, name= 'login_user'),
+	url(r'^event/$', views.home, name= 'home'),
 	url(r'^event/eventclassroomform/$',views.EventclassroomCreate.as_view(), name='eventclassroomform'),
 	url(r'^event/eventauditoriumform/$',views.EventauditoriumCreate.as_view(), name='eventauditoriumform'),
 	url(r'^event/eventextensioncableform/$',views.EventextensioncableCreate.as_view(), name='eventextensioncableform'),

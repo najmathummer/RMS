@@ -29,7 +29,27 @@ def login_user(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('/')
+            else:
+                return render(request, 'retest/login.html', {'error_message': 'Your account has been disabled'})
+        else:
+            return render(request, 'retest/login.html', {'error_message': 'Invalid login'})
+    return render(request, 'retest/login.html')
+@login_required(login_url='/login')
+def home(request):
+    user = request.user
+    if user.groups.filter(name='hod').exists():
+        u = request.user
+        projector_requests = Eventprojector.objects.all()
+        lab_requests = Eventlab.objects.all()
+        extensioncable_requests = Eventextensioncable.objects.all()
         all_requests= Retest.objects.all() 
+        return render(request, 'retest/hod.html', {'u' : u, 'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests})
+    elif user.groups.filter(name='principal').exists():
+        u = request.user
         projector_requests = Eventprojector.objects.all()
         classroom_requests = Eventclassroom.objects.all()
         lab_requests = Eventlab.objects.all()
@@ -37,38 +57,51 @@ def login_user(request):
         extensioncable_requests = Eventextensioncable.objects.all()
         auditorium_requests = Eventauditorium.objects.all()
         graphicshall_requests = Eventgraphicshall.objects.all()
-        u = User.objects.get(username=username)
-        
-        
-        
-
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                if user.groups.filter(name='hod').exists():
-                    return redirect('/hod')
-                elif user.groups.filter(name='principal').exists():
-                	return redirect('/principal')
-                elif user.groups.filter(name='Rep').exists():
-                	return redirect('/rep')
-                elif user.groups.filter(name='Ajithzen').exists():
-                    return redirect('/ajithsen')
-                elif user.groups.filter(name='graphics').exists():
-                    return redirect('/ashok')
-                elif user.groups.filter(name='Event_incharge').exists():
-                    return redirect('/incharge')
-                elif user.groups.filter(name='Event_coord').exists():
-                    return redirect('/chair')
-                elif user.groups.filter(name='IEEE').exists():
-                    return redirect('/ieee')
-                else:		
-                	return render(request, 'retest/login.html', {'error_message': 'Invalid login'})
-            else:
-                return render(request, 'retest/login.html', {'error_message': 'Your account has been disabled'})
-        else:
-            return render(request, 'retest/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'retest/login.html')
-@login_required
+        all_requests= Retest.objects.all() 
+        return render(request, 'retest/principal.html', {'all_requests' : all_requests, 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests, 'u':u })
+    elif user.groups.filter(name='Rep').exists():
+        u = request.user
+        all_requests= Retest.objects.all() 
+        return render(request, 'retest/home.html', {'u':u, 'all_requests' : all_requests })
+    elif user.groups.filter(name='Ajithzen').exists():
+        u = request.user
+        mikesystem_requests = Eventmikesystem.objects.all()
+        extensioncable_requests = Eventextensioncable.objects.all()
+        auditorium_requests = Eventauditorium.objects.all()
+        return render(request, 'event/ajithzen.html', {'extensioncable_requests' : extensioncable_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests':mikesystem_requests, 'u':u })
+    elif user.groups.filter(name='graphics').exists():
+        u = request.user
+        lab_requests = Eventlab.objects.all()
+        graphicshall_requests = Eventgraphicshall.objects.all()
+        return render(request, 'event/ashok.html', {'graphicshall_requests': graphicshall_requests, 'u':u,  'lab_requests' : lab_requests}) 
+    elif user.groups.filter(name='Event_incharge').exists():
+        u = request.user
+        projector_requests = Eventprojector.objects.all()
+        classroom_requests = Eventclassroom.objects.all()
+        lab_requests = Eventlab.objects.all()
+        mikesystem_requests = Eventmikesystem.objects.all()
+        extensioncable_requests = Eventextensioncable.objects.all()
+        auditorium_requests = Eventauditorium.objects.all()
+        graphicshall_requests = Eventgraphicshall.objects.all()
+        return render(request, 'event/incharge.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'u' : u, 'classroom_requests':classroom_requests, 'auditorium_requests' : auditorium_requests, 'mikesystem_requests':mikesystem_requests, 'graphicshall_requests': graphicshall_requests})
+    elif user.groups.filter(name='Event_coord').exists():
+        u = request.user
+        projector_requests = Eventprojector.objects.all()
+        classroom_requests = Eventclassroom.objects.all()
+        lab_requests = Eventlab.objects.all()
+        mikesystem_requests = Eventmikesystem.objects.all()
+        extensioncable_requests = Eventextensioncable.objects.all()
+        auditorium_requests = Eventauditorium.objects.all()
+        graphicshall_requests = Eventgraphicshall.objects.all()
+        return render(request, 'event/chair.html', { 'extensioncable_requests' : extensioncable_requests ,'graphicshall_requests' : graphicshall_requests ,'auditorium_requests' : auditorium_requests, 'mikesystem_requests' : mikesystem_requests, 'projector_requests': projector_requests, 'lab_requests' : lab_requests, 'classroom_requests' : classroom_requests , 'u' : u})
+    elif user.groups.filter(name='IEEE').exists():
+        u = request.user
+        projector_requests = Eventprojector.objects.all()
+        extensioncable_requests = Eventextensioncable.objects.all()
+        return render(request, 'event/ieee.html', { 'extensioncable_requests' : extensioncable_requests , 'projector_requests': projector_requests, 'u' : u})
+    else:       
+        return redirect('/login')
+'''@login_required
 def rep(request):
     u = request.user
     all_requests= Retest.objects.all() 
@@ -133,7 +166,7 @@ def ashok(request):
     u = request.user
     lab_requests = Eventlab.objects.all()
     graphicshall_requests = Eventgraphicshall.objects.all()
-    return render(request, 'event/ashok.html', {'graphicshall_requests': graphicshall_requests, 'u':u,  'lab_requests' : lab_requests}) 
+    return render(request, 'event/ashok.html', {'graphicshall_requests': graphicshall_requests, 'u':u,  'lab_requests' : lab_requests}) '''
 
     
 @login_required
