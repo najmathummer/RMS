@@ -25,6 +25,8 @@ def logout_user(request):
 
     
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('/')
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -176,7 +178,6 @@ def ashok(request):
     
 @login_required
 def details(request, retest_id):
-    
     try:
         retest= Retest.objects.get(pk=retest_id)
     except Retest.DoesNotExist:
