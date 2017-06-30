@@ -63,7 +63,15 @@
 <form action="{% url 'retest:accept' retest.id %} " method="post">
     {% csrf_token %}
     
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" class="submit"/>
 </form>
 
 </div>
+<script>
+$(document).ready(function(){
+  $('.submit').click(function(){
+    alert("The request has been accepted");
+  });
+});
+  
+</script>

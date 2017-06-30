@@ -15,7 +15,6 @@
     body, html {
     height: 100%;
     margin: 0;
-
   }
   .divider {
         height: 1px;
@@ -31,30 +30,23 @@
       top: 0;
       width: 100%;
   }
-
   .affix + .container-fluid {
       padding-top: 70px;
   }
-
    .sidenav {
       padding-top: 20px;
-      
+      position: fixed;
       height: 100%;
   }
-
   .row.content {height: 450px}
-
 /* On small screens, set height to 'auto' for sidenav and grid */
   @media screen and (max-width: 767px) {
       .sidenav {
         height:auto;
         padding: 15px;
   }
-
   .row.content {height:auto;} 
-
   </style>
-
 <body>
   
   <nav class=" a navbar navbar-inverse">
@@ -79,15 +71,12 @@
       </div>
     </div>
   </nav>
-
 <!--profile section-->
-
   <div class="text-center">    
     <div class="row content">
       <div class="col-sm-2 sidenav navbar-inverse" style="color: #ffffff">
         <p>My Profile</p>
               <ul class="nav nav-tabs nav-stacked ">
-
                 <li><img src="{{ u.allusers.avatar.url }}" alt="" class="img-circle" height="120" width="100" alt="" /></li>
                 <li><h4><b>{{u.username}}</b></h4></li>
                 <li role="separator" class="divider"></li>
@@ -96,10 +85,8 @@
                 <li><p>College of Engineering Chengannur</p></li>
               </ul>
       </div>
-
       
-
-      <div class="col-sm-9" style=" margin-left:50px;">
+      <div class="col-sm-9" style=" margin-left:300px;">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#home">All Requests</a></li>
           <li><a href="#menu1">Approved Requests</a></li>
@@ -148,7 +135,6 @@
                 {% endif %}  
                 </tbody>
                 {% endfor %}
-
                 {% for request in classroom_requests %}
                 <tbody>
                 {% if request.is_incharge %}    
@@ -166,7 +152,6 @@
                 {% endif %}
                 </tbody>
                 {% endfor %}
-
                 {% for request in lab_requests %}
                 <tbody>
                 {% if request.is_head %}    
@@ -184,7 +169,6 @@
                 {% endif %}
                 </tbody>
                 {% endfor %}
-
                 {% for request in mikesystem_requests %}
                 <tbody>
                 {% if request.is_head %}    
@@ -202,9 +186,7 @@
                 {% endif %}
                 </tbody>
                 {% endfor %}
-
                 
-
                 {% for request in projector_requests %}
                 <tbody>
                 {% if request.is_head %}    
@@ -305,7 +287,6 @@
                 {% endif %}  
                 </tbody>
                 {% endfor %}
-
                 {% for request in classroom_requests %}
                 <tbody>
                 {% if request.is_accept %}    
@@ -318,7 +299,6 @@
                 {% endif %}
                 </tbody>
                 {% endfor %}
-
                 {% for request in lab_requests %}
                 <tbody>
                 {% if request.is_accept %}    
@@ -331,7 +311,6 @@
                 {% endif %}
                 </tbody>
                 {% endfor %}
-
                 {% for request in mikesystem_requests %}
                 <tbody>
                 {% if request.is_accept %}    
@@ -344,9 +323,7 @@
                 {% endif %}
                 </tbody>
                 {% endfor %}
-
                 
-
                 {% for request in projector_requests %}
                 <tbody>
                 {% if request.is_accept %}    
