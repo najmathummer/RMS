@@ -11,10 +11,13 @@ from django.dispatch import receiver
 
 
 
+
+
 class Departement(models.Model):
 	dept = models.CharField(max_length=50)
 	hod = models.ForeignKey('auth.User')
 	def __str__(self):
+    		
 				 return self.dept
 
 

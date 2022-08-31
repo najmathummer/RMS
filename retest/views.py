@@ -14,6 +14,7 @@ from django.http import HttpResponse
 
 def logout_user(request):
     logout(request)
+    print("entered")
     form = UserForm(request.POST or None)
     context = {
         "form": form,
